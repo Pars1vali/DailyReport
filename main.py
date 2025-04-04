@@ -58,6 +58,7 @@ with st.form("Отчет"):
 
 if send and opio_name is not None:
     st.write(form)
+    st.write("Verison 1")
 
     st.html("""
         <head>
@@ -66,6 +67,7 @@ if send and opio_name is not None:
         
         <script>
         let tg = window.Telegram.WebApp;
+        tg.sendData("data");
         tg.close();
         </script>
     """)
