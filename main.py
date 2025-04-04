@@ -89,11 +89,11 @@ with st.form("Отчет"):
 
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    loan_apply = st.number_input("Заявки", value=topic.unit, key=f"{index_topic}loan_apply")
+                    loan_apply = st.number_input("Заявки", value=topic.unit, min_value=topic.unit, key=f"{index_topic}loan_apply")
                 with col2:
-                    approved = st.number_input("Одобрено", value=topic.unit, key=f"{index_topic}approved")
+                    approved = st.number_input("Одобрено", value=topic.unit, min_value=topic.unit, key=f"{index_topic}approved")
                 with col3:
-                    issued = st.number_input("Выдано", value=topic.unit, key=f"{index_topic}issued")
+                    issued = st.number_input("Выдано", value=topic.unit, min_value=topic.unit, key=f"{index_topic}issued")
 
                 form[topic.text] = {
                     "Заявки": loan_apply,
@@ -106,16 +106,16 @@ with st.form("Отчет"):
 
                 col1, col2 = st.columns(2)
                 with col1:
-                    plan = st.number_input("План", value=topic.unit, key=f"{index_group}plan")
+                    plan = st.number_input("План", value=topic.unit, min_value=topic.unit, key=f"{index_group}plan")
                 with col2:
-                    fact = st.number_input("Факт", value=topic.unit, key=f"{index_group}fact")
+                    fact = st.number_input("Факт", value=topic.unit, min_value=topic.unit, key=f"{index_group}fact")
 
                 form[topic.text] = {
                     "План": plan,
                     "Факт": fact
                 }
             else:
-                form[topic.text] = st.number_input(topic.text, value=topic.unit)
+                form[topic.text] = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
 
     send = st.form_submit_button("Отправить")
 
