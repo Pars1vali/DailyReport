@@ -4,7 +4,6 @@ from group import group_topics, opio_list
 
 form = dict()
 
-
 def credit_topic(topic: group.Topic):
     st.markdown(f"**{topic.text}**")
 
@@ -55,7 +54,7 @@ with st.form("Отчет"):
             else:
                 form[topic.text] = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
 
-    send = st.form_submit_button("Отправить")
+    send = st.form_submit_button("Отправить", use_container_width=True)
 
 if send and opio_name is not None:
     st.write(form)
