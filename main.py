@@ -4,6 +4,11 @@ from group import group_topics, opio_list
 
 form = dict()
 
+from mycomponent import mycomponent
+value = mycomponent(my_input_value="hello there")
+st.write("Received", value)
+
+
 def credit_topic(topic: group.Topic):
     st.markdown(f"**{topic.text}**")
 
