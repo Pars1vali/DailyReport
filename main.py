@@ -1,8 +1,12 @@
 import streamlit as st
+import logging
+
+import bot
 import group
 from group import group_topics, opio_list
 
 form = dict()
+logging.getLogger().setLevel(logging.INFO)
 
 def credit_topic(topic: group.Topic):
     st.markdown(f"**{topic.text}**")
@@ -58,4 +62,6 @@ with st.form("Отчет"):
 
 if send and opio_name is not None:
     st.write(form)
+    bot.send_report(form)
+    st.write("send")
 
