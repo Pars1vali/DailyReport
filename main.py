@@ -4,11 +4,6 @@ from group import group_topics, opio_list
 
 form = dict()
 
-from mycomponent import mycomponent
-value = mycomponent(my_input_value="hello there")
-st.write("Received", value)
-
-
 def credit_topic(topic: group.Topic):
     st.markdown(f"**{topic.text}**")
 
@@ -63,17 +58,4 @@ with st.form("Отчет"):
 
 if send and opio_name is not None:
     st.write(form)
-    st.write("Verison 1")
-
-    st.html("""
-        <head>
-        <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-        </head>
-        
-        <script>
-        let tg = window.Telegram.WebApp;
-        tg.sendData("data");
-        tg.close();
-        </script>
-    """)
 
