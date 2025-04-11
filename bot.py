@@ -8,5 +8,5 @@ bot = aiogram.Bot(token=BOT_TOKEN)
 
 chat_id = "7405295017"
 
-def send_report(report: str):
-    bot.send_message(chat_id, report)
+async def send_report(report: str):
+    await bot.send_message(chat_id, report)
