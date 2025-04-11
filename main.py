@@ -64,6 +64,6 @@ with st.form("Отчет"):
 
 if send and opio_name is not None:
     st.write(form)
-    asyncio.run(bot.send_report(form))
+    asyncio.run(bot.send_report("form"))
     st.write("send")
 
