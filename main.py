@@ -1,8 +1,5 @@
-import asyncio
-
 import streamlit as st
 import logging
-
 import bot
 import group
 from group import group_topics, opio_list
@@ -10,7 +7,8 @@ from group import group_topics, opio_list
 form = dict()
 logging.getLogger().setLevel(logging.INFO)
 
-def credit_topic(topic: group.Topic):
+
+def credit_topic(topic: group.Topic, index_topic):
     st.markdown(f"**{topic.text}**")
 
     col1, col2, col3 = st.columns(3)
@@ -27,7 +25,8 @@ def credit_topic(topic: group.Topic):
         "Выдано": issued
     }
 
-def plan_fact_topic(topic: group.Topic):
+
+def plan_fact_topic(topic: group.Topic, index_group):
     st.markdown(f"**{topic.text}**")
 
     col1, col2 = st.columns(2)
@@ -41,29 +40,33 @@ def plan_fact_topic(topic: group.Topic):
         "Факт": fact
     }
 
-with st.form("Отчет"):
 
-    opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
-    photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
+def main():
+    with st.form("Отчет"):
+        opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
+        photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
-    form["Название ОПиО"] = opio_name
+        form["Название ОПиО"] = opio_name
 
-    for index_group, group in enumerate(group_topics):
+        for index_group, group in enumerate(group_topics):
 
-        st.divider()
-        for index_topic, topic in enumerate(group.topics):
+            st.divider()
+            for index_topic, topic in enumerate(group.topics):
 
-            if topic.is_credit:
-                credit_topic(topic)
-            elif topic.have_plan:
-                plan_fact_topic(topic)
-            else:
-                form[topic.text] = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
+                if topic.is_credit:
+                    credit_topic(topic, index_topic)
+                elif topic.have_plan:
+                    plan_fact_topic(topic, index_group)
+                else:
+                    form[topic.text] = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
 
-    send = st.form_submit_button("Отправить", use_container_width=True)
+        send = st.form_submit_button("Отправить", use_container_width=True)
 
-if send and opio_name is not None:
-    st.write(form)
-    asyncio.run(bot.send_report("form"))
-    st.write("send")
+        if send and opio_name is not None:
+            st.write(form)
+            st.write("send")
+            bot.send_report(str(form))
 
+
+if __name__ == "__main__":
+    main()

@@ -1,12 +1,14 @@
 import os,logging
-import aiogram
+import telebot
+from telebot import types
+from telebot.types import LabeledPrice, ShippingOption
 
-logging.getLogger().setLevel(logging.INFO)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-bot = aiogram.Bot(token=BOT_TOKEN)
+chat_id = os.getenv("GROUP_CHAT_ID")
 
-chat_id = "7405295017"
+logging.getLogger().setLevel(logging.INFO)
+bot = telebot.TeleBot(BOT_TOKEN)
 
-async def send_report(report: str):
-    await bot.send_message(chat_id, report)
+def send_report(report: str):
+    bot.send_message(chat_id, report)
