@@ -19,6 +19,8 @@ def credit_topic(topic: group.Topic, index_topic):
     with col3:
         issued = st.number_input("Выдано", value=topic.unit, min_value=topic.unit, key=f"{index_topic}issued")
 
+    topic.value.credit = group.CreditValue(loan_apply, approved, issued)
+
     form[topic.text] = {
         "Заявки": loan_apply,
         "Одобрено": approved,
@@ -35,10 +37,26 @@ def plan_fact_topic(topic: group.Topic, index_group):
     with col2:
         fact = st.number_input("Факт", value=topic.unit, min_value=topic.unit, key=f"{index_group}fact")
 
+    topic.value.plan_fact = group.PlanFactValue(plan, fact)
+
     form[topic.text] = {
         "План": plan,
         "Факт": fact
     }
+
+
+def make_message_report(opio_name: str, group_topics):
+    message_report = f"🟢🟢🟣\nОфис - {opio_name}\n"
+    for group in group_topics:
+        message_report += "---\n"
+        for topic in group.topics:
+            if topic.have_plan:
+                message_report += f"{topic.text} (план/факт) - {topic.value.plan_fact.plan}/{topic.value.plan_fact.fact}\n"
+            elif topic.is_credit:
+                message_report += f"{topic.text} (заявки/одобрено/выдано) - {topic.value.credit.loan_apply}/{topic.value.credit.approved}/{topic.value.credit.issued}\n"
+            else:
+                message_report += f"{topic.text} - {topic.value.number}\n"
+    return message_report
 
 
 def main():
@@ -58,14 +76,15 @@ def main():
                 elif topic.have_plan:
                     plan_fact_topic(topic, index_group)
                 else:
-                    form[topic.text] = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
+                    topic.value.number = st.number_input(topic.text, value=topic.unit, min_value=topic.unit)
+                    form[topic.text] = topic.value.number
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
-        if send and opio_name is not None:
+        if send and opio_name is not None and photo_cheque is not None:
             st.write(form)
-            st.write("send")
-            bot.send_report(str(form))
+            message_report = make_message_report(opio_name, group_topics)
+            bot.send_report(message_report, photo_cheque)
 
 
 if __name__ == "__main__":
