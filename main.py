@@ -82,9 +82,11 @@ def main():
         send = st.form_submit_button("Отправить", use_container_width=True)
 
         if send and opio_name is not None and photo_cheque is not None:
-            st.write(form)
+            # st.write(form)
             message_report = make_message_report(opio_name, group_topics)
             bot.send_report(message_report, photo_cheque)
+            st.success("Отчет отправлен!")
+            st.balloons()
 
 
 if __name__ == "__main__":
