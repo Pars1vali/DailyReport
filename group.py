@@ -89,3 +89,17 @@ opio_list = list([
     "Усть-Лабинск Ленина",
     "Усть-Лабинск Ободовского"
 ])
+
+
+def make_message_report(opio_name: str, group_topics):
+    message_report = f"🟢🟢🟣\nОфис - {opio_name}\n"
+    for group in group_topics:
+        message_report += "---\n"
+        for topic in group.topics:
+            if topic.have_plan:
+                message_report += f"{topic.text} (план/факт) - {topic.value.plan_fact.plan}/{topic.value.plan_fact.fact}\n"
+            elif topic.is_credit:
+                message_report += f"{topic.text} (заявки/одобрено/выдано) - {topic.value.credit.loan_apply}/{topic.value.credit.approved}/{topic.value.credit.issued}\n"
+            else:
+                message_report += f"{topic.text} - {topic.value.number}\n"
+    return message_report
