@@ -1,0 +1,164 @@
+{
+  "topics": [
+    [
+      {
+        "type": "number",
+        "text": "Сим Мегафон+Yota, шт",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Мегасемья",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "number",
+        "text": "Абонементы Мегафон+Yota, (план/факт)",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": true
+      },
+      {
+        "type": "percent",
+        "text": "Доля абонементов от сим",
+        "help": "",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "number",
+        "text": "РК Realme(модели по акции)",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "РК HONOR(модели по акции)",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Первая цена",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Huawei",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Apple",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "money",
+        "text": "Аксесуары",
+        "help": "",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Акция 1+1",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "money",
+        "text": "ФУ",
+        "help": "",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Плотер",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "money",
+        "text": "Страховки",
+        "help": "",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "credit",
+        "text": "КД заявки, (заявки/одобрено/выдано)",
+        "help": "",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false
+      },
+      {
+        "type": "credit",
+        "text": "БК заявки, (заявки/одобрено/выдано)",
+        "help": "",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "number",
+        "text": "Адаптер",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "number",
+        "text": "NPS 9/10 факт за день",
+        "help": "",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ]
+  ]
+}
