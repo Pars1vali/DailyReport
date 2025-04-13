@@ -64,7 +64,12 @@ def number_topic(topic):
         "have_plan": False
     }
 
+def get_query_info():
+    return None, None, None
+
 def main():
+    chat_id, message_id, type_report = get_query_info()
+
     with open('report_daily.json', encoding='utf-8') as file:
         data = json.load(file)
 
@@ -87,11 +92,17 @@ def main():
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
-        if send and opio_name is not None and photo_cheque is not None:
-            message_report = make_message_report(opio_name, form)
-            bot.send_report(message_report, photo_cheque)
-            st.success("Отчет отправлен!")
-            st.balloons()
+        if send:
+            if opio_name is None:
+                st.warning("Необходимо выбрать название ОПиО")
+            elif photo_cheque is None:
+                st.warning("Необходимо загрузить фото отчета без гашения")
+            else:
+                message_report = make_message_report(opio_name, form)
+                bot.send_report(message_report, photo_cheque)
+                st.success("Отчет отправлен!")
+                st.balloons()
+
 
 
 if __name__ == "__main__":
