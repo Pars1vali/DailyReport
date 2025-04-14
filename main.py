@@ -2,7 +2,6 @@ import json
 import streamlit as st
 import logging
 import bot, group
-from bot import chat_id
 from group import opio_list, make_message_report
 
 form = list()
