@@ -67,11 +67,10 @@ def number_topic(topic):
 def get_query_info():
     try:
         is_url_correct = True
-        chat_id = st.query_params("chat_id")
-        type_report = st.query_params("type_report")
+        chat_id = st.query_params["chat_id"]
+        type_report = st.query_params["type_report"]
     except Exception as e:
         is_url_correct = False
-        print(e)
         chat_id, type_report = None, None
     return chat_id, None, type_report, is_url_correct
 
