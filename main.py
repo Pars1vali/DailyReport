@@ -2,6 +2,7 @@ import json
 import streamlit as st
 import logging
 import bot, group
+from bot import chat_id
 from group import opio_list, make_message_report
 
 form = list()
@@ -64,11 +65,22 @@ def number_topic(topic):
         "have_plan": False
     }
 
+
+
+
 def get_query_info():
-    return None, None, None
+    try:
+        is_url_correct = True
+        chat_id = st.query_params("chat_id")
+        type_report = st.query_params("type_report")
+    except Exception as e:
+        is_url_correct = False
+        print(e)
+        chat_id, type_report = None, None
+    return chat_id, None, type_report, is_url_correct
 
 def main():
-    chat_id, message_id, type_report = get_query_info()
+    chat_id, message_id, type_report, is_correct_url = get_query_info()
 
     with open('report_daily.json', encoding='utf-8') as file:
         data = json.load(file)
@@ -93,7 +105,9 @@ def main():
         send = st.form_submit_button("Отправить", use_container_width=True)
 
         if send:
-            if opio_name is None:
+            if is_correct_url is False:
+                st.error("Неверная ссылка. Отправить отчет не удастся.")
+            elif opio_name is None:
                 st.warning("Необходимо выбрать название ОПиО")
             elif photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
