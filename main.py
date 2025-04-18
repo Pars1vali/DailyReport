@@ -2,11 +2,10 @@ import json
 import streamlit as st
 import logging
 import bot, group
-from group import opio_list, make_message_report
+from group import opio_list, make_message_report, char_complete_opio
 
 form = list()
 logging.getLogger().setLevel(logging.INFO)
-
 
 def credit_topic(topic, index_topic):
     text_topic = topic["text"]
@@ -65,19 +64,19 @@ def number_topic(topic):
     }
 
 def get_query_info():
+    chat_id, message_id, type_report = None, None, None
     try:
-        is_url_correct = True
         chat_id = st.query_params["chat_id"]
         type_report = st.query_params["type_report"]
         message_id = st.query_params["message_id"]
+        is_url_correct = True
     except Exception as e:
         is_url_correct = False
-        chat_id, message_id, type_report = None, None, None
+
     return chat_id, message_id, type_report, is_url_correct
 
 def main():
-    chat_id, message_id, type_report, is_correct_url = get_query_info()
-    st.write(chat_id, message_id, type_report, is_correct_url)
+    chat_id, reply_message_id, type_report, is_correct_url = get_query_info()
 
     with open('report_daily.json', encoding='utf-8') as file:
         data = json.load(file)
@@ -110,6 +109,7 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 message_report = make_message_report(opio_name, form)
+                bot.set_report_complete(opio_name, reply_message_id, chat_id, char_complete_opio)
                 bot.send_report(message_report, photo_cheque, chat_id)
                 st.success("Отчет отправлен!")
                 st.balloons()

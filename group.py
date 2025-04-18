@@ -1,3 +1,10 @@
+char_default_status = "➖"
+char_complete_opio = "✅"
+char_stop_opio = "⛔"
+char_attention = "❗"
+char_time_status = "⌛"
+char_none_report_status = "❌"
+
 opio_list = list([
     "Став 189",
     "Став 141",
