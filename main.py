@@ -75,6 +75,7 @@ def get_query_info():
 
     return chat_id, message_id, type_report, is_url_correct
 
+
 def main():
     chat_id, reply_message_id, type_report, is_correct_url = get_query_info()
 
@@ -109,7 +110,6 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 message_report = make_message_report(opio_name, form)
-                # bot.set_report_complete(opio_name, reply_message_id, chat_id, char_complete_opio)
                 bot.send_report(message_report, photo_cheque, chat_id)
                 st.success("Отчет отправлен!")
                 st.balloons()
