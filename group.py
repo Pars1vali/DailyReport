@@ -26,6 +26,17 @@ opio_list = list([
 ])
 
 
+class QueryReport:
+    def __init__(self, url_correct: bool, chat_id=None, chat_type=None, message_id=None, message_date=None, type_report=None):
+        self.url_correct = url_correct
+        self.type_report = type_report
+        self.chat_id = chat_id
+        self.chat_type = chat_type
+        self.message_id = message_id
+        self.message_date = message_date
+
+
+
 def make_message_report(opio_name: str, group_topics):
     message_report = f"Офис = {opio_name}\n"
     for group in group_topics:
