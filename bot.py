@@ -1,11 +1,10 @@
 import os, logging, re
 import telebot
-from watchdog.observers.fsevents2 import message
 import group
 from thefuzz import process
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-chat_id = os.getenv("GROUP_CHAT_ID")
+BOT_TOKEN = "8095263812:AAEhlt_PCB-kjoWuLXf_Wd-zZss1_gbBWjw"  #os.getenv("BOT_TOKEN")
+chat_id = "7405295017"  #os.getenv("GROUP_CHAT_ID")
 
 logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
