@@ -20,6 +20,7 @@ def set_status(query_report: group.QueryReport):
                                     chat=message_chat,
                                     content_type=["text"],
                                     date=query_report.message_date,
+                                    from_user=message_chat,
                                     options={},
                                     json_string="")
 
