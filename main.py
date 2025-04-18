@@ -112,6 +112,7 @@ def main():
             else:
                 message_report = make_message_report(opio_name, form)
                 bot.send_report(message_report, photo_cheque, query_report.chat_id)
+                bot.set_status(query_report)
                 st.success("Отчет отправлен!")
                 st.balloons()
 
