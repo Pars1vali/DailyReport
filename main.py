@@ -69,13 +69,15 @@ def get_query_info():
         is_url_correct = True
         chat_id = st.query_params["chat_id"]
         type_report = st.query_params["type_report"]
+        message_id = st.query_params["message_id"]
     except Exception as e:
         is_url_correct = False
-        chat_id, type_report = None, None
-    return chat_id, None, type_report, is_url_correct
+        chat_id, message_id, type_report = None, None, None
+    return chat_id, message_id, type_report, is_url_correct
 
 def main():
     chat_id, message_id, type_report, is_correct_url = get_query_info()
+    st.write(chat_id, message_id, type_report, is_correct_url)
 
     with open('report_daily.json', encoding='utf-8') as file:
         data = json.load(file)
