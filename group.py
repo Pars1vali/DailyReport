@@ -38,7 +38,7 @@ class QueryReport:
 
 
 def make_message_report(opio_name: str, group_topics):
-    message_report = "/cross"
+    message_report = "/cross\n"
     message_report += f"Офис = {opio_name}\n"
     for group in group_topics:
         message_report += "🟢\n"
