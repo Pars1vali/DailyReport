@@ -24,4 +24,6 @@ def set_status(query_report: group.QueryReport):
                                     options={},
                                     json_string="")
 
+    print(message)
+
 
