@@ -32,7 +32,7 @@ def set_status(query_report: group.QueryReport, opio_name: str, char_status: str
     message_report = get_message_report()
     opio, probability = process.extract(opio_name, group.opio_list, limit=1)[0]
     report_message = re.sub(
-        f'{opio} - [{group.char_complete_opio}{group.char_time_status}{group.char_default_status}{group.char_stop_opio}]', \
+        f'{opio} - [{group.char_complete_opio}{group.char_time_status}{group.char_default_status}{group.char_stop_opio}{group.char_none_report_status}]', \
         f"{opio} - {char_status}", \
         message_report)
 
