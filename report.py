@@ -51,3 +51,8 @@ def create_message(opio_name: str, group_topics):
                 message_report += f'{topic["text"]} = {topic["value"]}\n'
 
     return message_report
+
+
+def set(name, data):
+    logging.info("Set new report message in redis storage.")
+    r.set(name, data)

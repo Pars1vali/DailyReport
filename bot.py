@@ -19,6 +19,7 @@ def set_status(query_report: group.QueryReport, opio_name: str, char_status: str
         report_message_old)
     bot.edit_message_text(chat_id=query_report.chat_id, message_id=query_report.message_id,
                                 text=report_message_edit)
+    report.set("message_report", report_message_edit)
     logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
 
 
