@@ -9,18 +9,23 @@ chat_id = os.getenv("GROUP_CHAT_ID")
 logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
 
-def send_report(message: str, photo_cheque, query_report: group.QueryReport):
+def send_report(message: str, photo_cheque, query_report: group.QueryReport, opio_name):
+    logging.info(f"Send report for sales with check photo. For tg-groupe{query_report.chat_id}.")
     bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message)
+    logging.info("Set status ")
+    bot.set_status(query_report, opio_name, group.char_complete_opio)
 
 
 def set_status(query_report: group.QueryReport, opio_name: str, char_status: str):
-    message_report = report.get("message_report")
+    report_message_old = report.get("message_report")
+    logging.info(f"Set stautus - {char_status} for opio -{opio_name} in report-message.")
     opio, probability = process.extract(opio_name, group.opio_list, limit=1)[0]
-    report_message = re.sub(
+    report_message_edit = re.sub(
         f'{opio} - [{group.char_complete_opio}{group.char_time_status}{group.char_default_status}{group.char_stop_opio}{group.char_none_report_status}]', \
         f"{opio} - {char_status}", \
-        message_report)
+        report_message_old)
 
+    logging.info("Edit report-message in chat with new status for opio.")
     bot.edit_message_text(chat_id=query_report.chat_id, message_id=query_report.message_id,
-                                text=report_message)
+                                text=report_message_edit)
     logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")

@@ -5,7 +5,7 @@ import bot, group
 import report
 from group import opio_list, char_complete_opio
 
-form = list()
+report_data = list()
 logging.getLogger().setLevel(logging.INFO)
 
 def credit_topic(topic, index_topic):
@@ -89,7 +89,7 @@ def main():
 
         for index_group, group in enumerate(data["topics"]):
             group_unit = list()
-            form.append(group_unit)
+            report_data.append(group_unit)
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
                     group_unit.append(credit_topic(topic, index_topic))
@@ -109,9 +109,8 @@ def main():
             elif photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                message = report.create_message(opio_name, form)
+                message = report.create_message(opio_name, report_data)
                 bot.send_report(message, photo_cheque, query_report)
-                bot.set_status(query_report, opio_name, char_complete_opio)
                 st.success("Отчет отправлен!")
                 st.balloons()
 

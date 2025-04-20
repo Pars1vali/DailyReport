@@ -10,7 +10,6 @@ r = redis.Redis(
     password=os.getenv("REDIS_PASSWORD")
 )
 
-
 def create(name: str, char_status):
     logging.info(f"Create report with name - {name}")
     date_now = datetime.datetime.now()
@@ -22,17 +21,22 @@ def create(name: str, char_status):
 
 
 def get(name):
+    logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {name}")
     message_report_exists = r.exists(name)
+    logging.info(f"Report-message in redis storage {message_report_exists}.")
     if message_report_exists:
+        logging.info("Get message-report from redis.")
         message_report_data = r.get(name)
         message_report = message_report_data.decode("utf-8")
     else:
+        logging.info("Create new report-message and load to redis.")
         message_report = create("Отчет о продажах", group.char_none_report_status)
         r.set(name, message_report)
     return message_report
 
 
 def create_message(opio_name: str, group_topics):
+    logging.info("Create message format tg fro groupe sales.")
     message_report = f"Офис = {opio_name}\n"
     for group in group_topics:
         message_report += "🟢\n"
