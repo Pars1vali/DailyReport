@@ -43,12 +43,12 @@ def create_message(opio_name: str, group_topics):
         for topic in group:
             if topic["have_plan"] is True:
                 text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} = [{value["plan"]},{value["fact"]}]\n'
+                message_report += f'\t{text} - {value["plan"]}/{value["fact"]}\n'
             elif topic["is_credit"] is True:
                 text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} = [{value["loan_apply"]},{value["approved"]},{value["issued"]}]\n'
+                message_report += f'\t{text} - {value["loan_apply"]}/{value["approved"]}/{value["issued"]}\n'
             else:
-                message_report += f'\t{topic["text"]} = {topic["value"]}\n'
+                message_report += f'\t{topic["text"]} - {topic["value"]}\n'
 
     return message_report
 

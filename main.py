@@ -94,7 +94,8 @@ def main():
     model_report = get_model_report(query_report)
 
     with st.form("Отчет"):
-        st.header("Отчет")
+        name_report = model_report["name"]
+        st.header(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
