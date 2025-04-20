@@ -72,6 +72,7 @@ def get_query_info():
         query_report.message_id = st.query_params["message_id"]
     except Exception as e:
         query_report.url_correct = False
+        logging.error(e)
 
     return query_report
 
