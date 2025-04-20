@@ -76,19 +76,28 @@ def get_query_info():
 
     return query_report
 
+def get_model_report(query_report: group.QueryReport):
+    if query_report.type_report == "director":
+        src_path = "src/model/director.json"
+    else:
+        src_path = "src/model/sales.json"
+
+    with open(src_path, encoding='utf-8') as file:
+        model_report = json.load(file)
+
+    return model_report
+
 
 def main():
     query_report = get_query_info()
-
-    with open('src/report_type/sales.json', encoding='utf-8') as file:
-        data = json.load(file)
+    model_report = get_model_report(query_report)
 
     with st.form("Отчет"):
         st.header("Отчет")
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
-        for index_group, group in enumerate(data["topics"]):
+        for index_group, group in enumerate(model_report["topics"]):
             group_unit = list()
             report_data.append(group_unit)
             for index_topic, topic in enumerate(group):
@@ -113,7 +122,6 @@ def main():
                 bot.send_report(report_data, photo_cheque, query_report, opio_name)
                 st.success("Отчет отправлен!")
                 st.balloons()
-
 
 
 if __name__ == "__main__":
