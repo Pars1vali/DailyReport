@@ -2,7 +2,8 @@ import json
 import streamlit as st
 import logging
 import bot, group
-from group import opio_list, make_message_report, char_complete_opio
+import report
+from group import opio_list, char_complete_opio
 
 form = list()
 logging.getLogger().setLevel(logging.INFO)
@@ -68,9 +69,7 @@ def get_query_info():
         query_report = group.QueryReport(url_correct=True)
         query_report.type_report = st.query_params["type_report"]
         query_report.chat_id = st.query_params["chat_id"]
-        query_report.chat_type = st.query_params["chat_type"]
         query_report.message_id = st.query_params["message_id"]
-        query_report.message_date = st.query_params["message_date"]
     except Exception as e:
         query_report.url_correct = False
 
@@ -110,8 +109,8 @@ def main():
             elif photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                message_report = make_message_report(opio_name, form)
-                bot.send_report(message_report, photo_cheque, query_report.chat_id)
+                message = report.create_message(opio_name, form)
+                bot.send_report(message, photo_cheque, query_report)
                 bot.set_status(query_report, opio_name, char_complete_opio)
                 st.success("Отчет отправлен!")
                 st.balloons()

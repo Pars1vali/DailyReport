@@ -34,22 +34,3 @@ class QueryReport:
         self.chat_type = chat_type
         self.message_id = message_id
         self.message_date = message_date
-
-
-
-def make_message_report(opio_name: str, group_topics):
-    message_report = "/cross\n"
-    message_report += f"Офис = {opio_name}\n"
-    for group in group_topics:
-        message_report += "🟢\n"
-        for topic in group:
-            if topic["have_plan"] is True:
-                text, value = topic["text"], topic["value"]
-                message_report += f'{text} = [{value["plan"]},{value["fact"]}]\n'
-            elif topic["is_credit"] is True:
-                text, value = topic["text"], topic["value"]
-                message_report += f'{text} = [{value["loan_apply"]},{value["approved"]},{value["issued"]}]\n'
-            else:
-                message_report += f'{topic["text"]} = {topic["value"]}\n'
-
-    return message_report
