@@ -80,7 +80,7 @@ def get_query_info():
 def main():
     query_report = get_query_info()
 
-    with open('report_daily.json', encoding='utf-8') as file:
+    with open('src/report_type/sales.json', encoding='utf-8') as file:
         data = json.load(file)
 
     with st.form("Отчет"):
