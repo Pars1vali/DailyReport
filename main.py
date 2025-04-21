@@ -1,75 +1,75 @@
 import json
 import streamlit as st
 import logging
-import bot, group
+import bot, group, topic
 import report
 from group import opio_list, char_complete_opio
 
 report_data = list()
 logging.getLogger().setLevel(logging.INFO)
-
-def credit_topic(topic, index_topic):
-    text_topic = topic["text"]
-    emoji = topic.get("emoji", "🟢")
-    st.markdown(f"**{text_topic}**")
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
-                                     key=f"{index_topic}loan_apply")
-    with col2:
-        approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
-                                   key=f"{index_topic}approved")
-    with col3:
-        issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
-                                 key=f"{index_topic}issued")
-
-    return {
-        "text": text_topic,
-        "emoji": emoji,
-        "value": {
-            "loan_apply": loan_apply,
-            "approved": approved,
-            "issued": issued
-        },
-        "is_credit": True,
-        "have_plan": False
-    }
-
-def plan_fact_topic(topic, index_group):
-    text_topic = topic["text"]
-    emoji = topic.get("emoji", "🟢")
-    st.markdown(f"**{text_topic}**")
-
-    col1, col2 = st.columns(2)
-    with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
-    with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
-
-    return {
-        "text": text_topic,
-        "emoji": emoji,
-        "value": {
-            "plan": plan,
-            "fact": fact
-        },
-        "is_credit": False,
-        "have_plan": True
-    }
-
-def number_topic(topic, index_group, index_topic):
-    value_topic = st.number_input(topic["text"], value=topic["unit"],
-                                  min_value=topic["unit"], key=f"{index_group}_{index_topic}_number")
-    emoji = topic.get("emoji", "🟢")
-
-    return {
-        "text": topic["text"],
-        "emoji": emoji,
-        "value": value_topic,
-        "is_credit": False,
-        "have_plan": False
-    }
+#
+# def credit_topic(topic, index_topic):
+#     text_topic = topic["text"]
+#     emoji = topic.get("emoji", "🟢")
+#     st.markdown(f"**{text_topic}**")
+#
+#     col1, col2, col3 = st.columns(3)
+#     with col1:
+#         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
+#                                      key=f"{index_topic}loan_apply")
+#     with col2:
+#         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
+#                                    key=f"{index_topic}approved")
+#     with col3:
+#         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
+#                                  key=f"{index_topic}issued")
+#
+#     return {
+#         "text": text_topic,
+#         "emoji": emoji,
+#         "value": {
+#             "loan_apply": loan_apply,
+#             "approved": approved,
+#             "issued": issued
+#         },
+#         "is_credit": True,
+#         "have_plan": False
+#     }
+#
+# def plan_fact_topic(topic, index_group):
+#     text_topic = topic["text"]
+#     emoji = topic.get("emoji", "🟢")
+#     st.markdown(f"**{text_topic}**")
+#
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
+#     with col2:
+#         fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
+#
+#     return {
+#         "text": text_topic,
+#         "emoji": emoji,
+#         "value": {
+#             "plan": plan,
+#             "fact": fact
+#         },
+#         "is_credit": False,
+#         "have_plan": True
+#     }
+#
+# def number_topic(topic, index_group, index_topic):
+#     value_topic = st.number_input(topic["text"], value=topic["unit"],
+#                                   min_value=topic["unit"], key=f"{index_group}_{index_topic}_number")
+#     emoji = topic.get("emoji", "🟢")
+#
+#     return {
+#         "text": topic["text"],
+#         "emoji": emoji,
+#         "value": value_topic,
+#         "is_credit": False,
+#         "have_plan": False
+#     }
 
 def get_query_info():
     try:
@@ -114,11 +114,11 @@ def main():
             report_data.append(group_unit)
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
-                    group_unit.append(credit_topic(topic, index_topic))
+                    group_unit.append(topic.credit_topic(topic, index_topic))
                 elif topic["have_plan"] is True:
-                    group_unit.append(plan_fact_topic(topic, index_group))
+                    group_unit.append(topic.plan_fact_topic(topic, index_group))
                 else:
-                    group_unit.append(number_topic(topic, index_group, index_topic))
+                    group_unit.append(topic.number_topic(topic, index_group, index_topic))
 
 
         send = st.form_submit_button("Отправить", use_container_width=True)
