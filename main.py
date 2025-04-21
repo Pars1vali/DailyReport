@@ -58,9 +58,9 @@ def plan_fact_topic(topic, index_group):
         "have_plan": True
     }
 
-def number_topic(topic):
+def number_topic(topic, index_topic):
     value_topic = st.number_input(topic["text"], value=topic["unit"],
-                                  min_value=topic["unit"])
+                                  min_value=topic["unit"], key=f"{index_topic}_number")
     emoji = topic.get("emoji", "🟢")
 
     return {
@@ -114,7 +114,7 @@ def main():
                 elif topic["have_plan"] is True:
                     group_unit.append(plan_fact_topic(topic, index_group))
                 else:
-                    group_unit.append(number_topic(topic))
+                    group_unit.append(number_topic(topic, index_topic))
 
 
         send = st.form_submit_button("Отправить", use_container_width=True)
