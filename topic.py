@@ -1,6 +1,6 @@
 import streamlit as st
 
-def credit(topic, index_topic):
+def credit(topic, index):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
@@ -8,13 +8,13 @@ def credit(topic, index_topic):
     col1, col2, col3 = st.columns(3)
     with col1:
         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
-                                     key=f"{index_topic}loan_apply")
+                                     key=f"{index}loan_apply")
     with col2:
         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
-                                   key=f"{index_topic}approved")
+                                   key=f"{index}approved")
     with col3:
         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
-                                 key=f"{index_topic}issued")
+                                 key=f"{index}issued")
 
     return {
         "text": text_topic,
@@ -29,16 +29,16 @@ def credit(topic, index_topic):
         "share": False
     }
 
-def plan_fact(topic, index_group):
+def plan_fact(topic, index):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
     col1, col2 = st.columns(2)
     with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
+        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
     with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
+        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
 
     return {
         "text": text_topic,
@@ -52,16 +52,16 @@ def plan_fact(topic, index_group):
         "share": False
     }
 
-def share(topic, index_group):
+def share(topic, index):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
     col1, col2 = st.columns(2)
     with col1:
-        value_1 = st.number_input("Число_1", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
+        value_1 = st.number_input("Число_1", value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
     with col2:
-        value_2 = st.number_input("Число_2", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
+        value_2 = st.number_input("Число_2", value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
 
     share = int((value_2 * 100) / (value_1 + 1))
     return {

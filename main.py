@@ -54,7 +54,7 @@ def main():
                 elif topic["have_plan"] is True:
                     group_unit.append(plan_fact(topic, index_group))
                 elif topic["share"] is True:
-                    group_unit.append(share(topic, index_group))
+                    group_unit.append(share(topic, index_topic))
                 else:
                     group_unit.append(number(topic, index_group, index_topic))
 
