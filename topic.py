@@ -63,7 +63,7 @@ def share(topic, index_group):
     with col2:
         value_2 = st.number_input("Число_2", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
 
-    share = int((value_2 * 100) / value_1)
+    share = int((value_2 * 100) / (value_1 + 1))
     return {
         "text": text_topic,
         "emoji": emoji,
