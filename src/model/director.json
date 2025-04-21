@@ -8,7 +8,187 @@
         "text": "Смартфоны , шт",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "СМФ 1 цены, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "Apple, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "Honor, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "REALME, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "HUAWEI, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "emoji": "🚀",
+        "type": "credit",
+        "text": "Заявки КД(подача, одобрено, выдано)",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "💳",
+        "type": "credit",
+        "text": "Заявки БК(подача, одобрено, выдано)",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "emoji": "🪪",
+        "type": "number",
+        "text": "SIM неризедентам, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "📊",
+        "type": "number",
+        "text": "Фокусные ТП Мегафон, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": true
+      },
+      {
+        "emoji": "👨‍👨‍👧‍👧",
+        "type": "number",
+        "text": "Фокусные ТП Мегафон, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "💵",
+        "type": "money",
+        "text": "СБП, руб",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": true
+      },
+      {
+        "emoji": "💷",
+        "type": "money",
+        "text": "ДП, руб",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "🚚",
+        "type": "money",
+        "text": "Виртуальная полка, руб",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "🔅",
+        "type": "number",
+        "text": "VIP ТП, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "emoji": "📱",
+        "type": "number",
+        "text": "Адаптер, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "👶",
+        "type": "number",
+        "text": "Реф. программа, анект",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "type": "number",
+        "text": "Опоздания за сегодня",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "Простой 60 минут за сегодня",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "Увольнение факт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "type": "number",
+        "text": "Увольнение стажеров факт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
       }
     ]
   ]
