@@ -39,6 +39,7 @@ def create_message(opio_name: str, group_topics):
     logging.info("Create message format tg fro groupe sales.")
     message_report = f"Офис = {opio_name}\n"
     for group in group_topics:
+        emoji = group
         message_report += "🟢\t"
         for topic in group:
             if topic["have_plan"] is True:

@@ -10,6 +10,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 def credit_topic(topic, index_topic):
     text_topic = topic["text"]
+    emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
     col1, col2, col3 = st.columns(3)
@@ -25,6 +26,7 @@ def credit_topic(topic, index_topic):
 
     return {
         "text": text_topic,
+        "emoji": emoji,
         "value": {
             "loan_apply": loan_apply,
             "approved": approved,
@@ -36,6 +38,7 @@ def credit_topic(topic, index_topic):
 
 def plan_fact_topic(topic, index_group):
     text_topic = topic["text"]
+    emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
     col1, col2 = st.columns(2)
@@ -46,6 +49,7 @@ def plan_fact_topic(topic, index_group):
 
     return {
         "text": text_topic,
+        "emoji": emoji,
         "value": {
             "plan": plan,
             "fact": fact
@@ -57,8 +61,11 @@ def plan_fact_topic(topic, index_group):
 def number_topic(topic):
     value_topic = st.number_input(topic["text"], value=topic["unit"],
                                   min_value=topic["unit"])
+    emoji = topic.get("emoji", "🟢")
+
     return {
         "text": topic["text"],
+        "emoji": emoji,
         "value": value_topic,
         "is_credit": False,
         "have_plan": False
