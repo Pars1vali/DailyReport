@@ -3,6 +3,7 @@ import streamlit as st
 import logging
 import bot, group, topic, report
 from group import opio_list, char_complete_opio
+from topic import share, credit, plan_fact, number
 
 report_data = list()
 logging.getLogger().setLevel(logging.INFO)
@@ -49,13 +50,13 @@ def main():
             report_data.append(group_unit)
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
-                    group_unit.append(topic.credit(topic, index_topic))
+                    group_unit.append(credit(topic, index_topic))
                 elif topic["have_plan"] is True:
-                    group_unit.append(topic.plan_fact(topic, index_group))
+                    group_unit.append(plan_fact(topic, index_group))
                 elif topic["share"] is True:
-                    group_unit.append(topic.share(topic, index_group))
+                    group_unit.append(share(topic, index_group))
                 else:
-                    group_unit.append(topic.number(topic, index_group, index_topic))
+                    group_unit.append(number(topic, index_group, index_topic))
 
 
         send = st.form_submit_button("Отправить", use_container_width=True)
