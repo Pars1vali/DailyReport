@@ -29,4 +29,7 @@ def send_report(report_data: str, photo_cheque, query_report: group.QueryReport,
     logging.info(f"Send report for sales with check photo. For tg-groupe{query_report.chat_id}.")
     bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message)
     logging.info("Set status ")
-    set_status(query_report, opio_name, group.char_complete_opio)
+    try:
+        set_status(query_report, opio_name, group.char_complete_opio)
+    except Exception as e:
+        logging.error(f"Failure set status. Message-report have the same text. Status for this already there.\n{e}")
