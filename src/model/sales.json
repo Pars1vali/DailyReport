@@ -8,14 +8,16 @@
         "text": "Сим Мегафон+Yota, шт",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Мегасемья",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -24,14 +26,16 @@
         "text": "Абонементы Мегафон+Yota, (план/факт)",
         "unit": 0,
         "is_credit": false,
-        "have_plan": true
+        "have_plan": true,
+        "share": false
       },
       {
         "type": "percent",
         "text": "Доля абонементов от сим",
         "unit": 0.0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -40,35 +44,40 @@
         "text": "РК Realme(модели по акции)",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "РК HONOR(модели по акции)",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Первая цена",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Huawei",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Apple",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -77,14 +86,16 @@
         "text": "Аксесуары",
         "unit": 0.0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Акция 1+1",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -93,21 +104,24 @@
         "text": "ФУ",
         "unit": 0.0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "number",
         "text": "Плотер",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "money",
         "text": "Страховки",
         "unit": 0.0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -116,14 +130,16 @@
         "text": "КД заявки, (заявки/одобрено/выдано)",
         "unit": 0,
         "is_credit": true,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       },
       {
         "type": "credit",
         "text": "БК заявки, (заявки/одобрено/выдано)",
         "unit": 0,
         "is_credit": true,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -132,7 +148,8 @@
         "text": "Адаптер",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -141,7 +158,8 @@
         "text": "NPS 9/10 факт за день",
         "unit": 0,
         "is_credit": false,
-        "have_plan": false
+        "have_plan": false,
+        "share": false
       }
     ]
   ]

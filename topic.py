@@ -1,6 +1,6 @@
 import streamlit as st
 
-def credit_topic(topic, index_topic):
+def credit(topic, index_topic):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
@@ -25,10 +25,11 @@ def credit_topic(topic, index_topic):
             "issued": issued
         },
         "is_credit": True,
-        "have_plan": False
+        "have_plan": False,
+        "share": False
     }
 
-def plan_fact_topic(topic, index_group):
+def plan_fact(topic, index_group):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
@@ -47,10 +48,36 @@ def plan_fact_topic(topic, index_group):
             "fact": fact
         },
         "is_credit": False,
-        "have_plan": True
+        "have_plan": True,
+        "share": False
     }
 
-def number_topic(topic, index_group, index_topic):
+def share(topic, index_group):
+    text_topic = topic["text"]
+    emoji = topic.get("emoji", "🟢")
+    st.markdown(f"**{text_topic}**")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        value_1 = st.number_input("Число_1", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
+    with col2:
+        value_2 = st.number_input("Число_2", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
+
+    share = int((value_2 * 100) / value_1)
+    return {
+        "text": text_topic,
+        "emoji": emoji,
+        "value": {
+            "value_1": value_1,
+            "value_2": value_2,
+            "share": share
+        },
+        "is_credit": False,
+        "have_plan": False,
+        "share": True
+    }
+
+def number(topic, index_group, index_topic):
     value_topic = st.number_input(topic["text"], value=topic["unit"],
                                   min_value=topic["unit"], key=f"{index_group}_{index_topic}_number")
     emoji = topic.get("emoji", "🟢")
@@ -60,5 +87,6 @@ def number_topic(topic, index_group, index_topic):
         "emoji": emoji,
         "value": value_topic,
         "is_credit": False,
-        "have_plan": False
+        "have_plan": False,
+        "share": False
     }
