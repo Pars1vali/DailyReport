@@ -4,14 +4,42 @@
     [
       {
         "type": "number",
-        "text": "Сим Мегафон+Yota, шт",
+        "text": "Смартфоны , шт",
         "unit": 0,
         "is_credit": false,
         "have_plan": false
       },
       {
         "type": "number",
-        "text": "Мегасемья",
+        "text": "СМФ 1 цены",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Apple, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "Honor, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "REALME, шт",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "HUAWEI, шт",
         "unit": 0,
         "is_credit": false,
         "have_plan": false
@@ -20,7 +48,7 @@
     [
       {
         "type": "number",
-        "text": "Абонементы Мегафон+Yota, (план/факт)",
+        "text": "Заявки КД",
         "unit": 0,
         "is_credit": false,
         "have_plan": true
@@ -72,45 +100,6 @@
     ],
     [
       {
-        "type": "money",
-        "text": "Аксесуары",
-        "unit": 0.0,
-        "is_credit": false,
-        "have_plan": false
-      },
-      {
-        "type": "number",
-        "text": "Акция 1+1",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false
-      }
-    ],
-    [
-      {
-        "type": "money",
-        "text": "ФУ",
-        "unit": 0.0,
-        "is_credit": false,
-        "have_plan": false
-      },
-      {
-        "type": "number",
-        "text": "Плотер",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false
-      },
-      {
-        "type": "money",
-        "text": "Страховки",
-        "unit": 0.0,
-        "is_credit": false,
-        "have_plan": false
-      }
-    ],
-    [
-      {
         "type": "credit",
         "text": "КД заявки, (заявки/одобрено/выдано)",
         "unit": 0,
@@ -128,6 +117,36 @@
     [
       {
         "type": "number",
+        "text": "Сим нерезидентам",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": true
+      },
+      {
+        "type": "number",
+        "text": "МегаСемья",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "number",
+        "text": "VIP ТП",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false
+      },
+      {
+        "type": "money",
+        "text": "Виртуальная полка",
+        "unit": 0.0,
+        "is_credit": false,
+        "have_plan": false
+      }
+    ],
+    [
+      {
+        "type": "number",
         "text": "Адаптер",
         "unit": 0,
         "is_credit": false,
@@ -137,7 +156,7 @@
     [
       {
         "type": "number",
-        "text": "NPS 9/10 факт за день",
+        "text": "Реф.программа анкет/оформлено",
         "unit": 0,
         "is_credit": false,
         "have_plan": false
