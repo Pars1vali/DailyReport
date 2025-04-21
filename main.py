@@ -95,12 +95,16 @@ def get_model_report(query_report: group.QueryReport):
 
     return model_report
 
+
+
 def main():
     query_report = get_query_info()
     model_report = get_model_report(query_report)
 
     with st.form("Отчет"):
         name_report = model_report.get("name", "Отчет")
+        photo_need = model_report.get("photo_need", False)
+
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
