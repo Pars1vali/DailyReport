@@ -1,7 +1,7 @@
 import streamlit as st
 
 def credit(topic, index):
-    text_topic = topic["text"]
+    text_topic = f"{topic["text"]} (заявки/одобрено/выдано)"
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
@@ -30,7 +30,7 @@ def credit(topic, index):
     }
 
 def plan_fact(topic, index):
-    text_topic = topic["text"]
+    text_topic = f"{topic["text"]} (план/факт)"
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
@@ -53,7 +53,7 @@ def plan_fact(topic, index):
     }
 
 def share(topic, index):
-    text_topic = topic["text"]
+    text_topic = f"{topic["text"]} %"
     emoji = topic.get("emoji", "🟢")
     st.markdown(f"**{text_topic}**")
 
@@ -78,7 +78,9 @@ def share(topic, index):
     }
 
 def number(topic, index_group, index_topic):
-    value_topic = st.number_input(topic["text"], value=topic["unit"],
+    unit = "руб" if topic["type"] == "money" else "шт"
+    text_topic = f"{topic["text"]}, {unit}"
+    value_topic = st.number_input( text_topic, value=topic["unit"],
                                   min_value=topic["unit"], key=f"{index_group}_{index_topic}_number")
     emoji = topic.get("emoji", "🟢")
 
@@ -90,3 +92,4 @@ def number(topic, index_group, index_topic):
         "have_plan": False,
         "share": False
     }
+

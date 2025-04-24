@@ -6,7 +6,7 @@
       {
         "emoji": "📱",
         "type": "number",
-        "text": "Смартфоны , шт",
+        "text": "Смартфоны",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -14,7 +14,7 @@
       },
       {
         "type": "number",
-        "text": "СМФ 1 цены, шт",
+        "text": "СМФ 1 цены",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -22,7 +22,7 @@
       },
       {
         "type": "number",
-        "text": "Apple, шт",
+        "text": "Apple",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -30,7 +30,7 @@
       },
       {
         "type": "number",
-        "text": "Honor, шт",
+        "text": "Honor",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -38,7 +38,7 @@
       },
       {
         "type": "number",
-        "text": "REALME, шт",
+        "text": "REALME",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -46,7 +46,7 @@
       },
       {
         "type": "number",
-        "text": "HUAWEI, шт",
+        "text": "HUAWEI",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -57,7 +57,7 @@
       {
         "emoji": "🚀",
         "type": "credit",
-        "text": "Заявки КД(подача, одобрено, выдано)",
+        "text": "Заявки КД",
         "unit": 0,
         "is_credit": true,
         "have_plan": false,
@@ -66,7 +66,7 @@
       {
         "emoji": "💳",
         "type": "credit",
-        "text": "Заявки БК(подача, одобрено, выдано)",
+        "text": "Заявки БК",
         "unit": 0,
         "is_credit": true,
         "have_plan": false,
@@ -77,7 +77,7 @@
       {
         "emoji": "🪪",
         "type": "number",
-        "text": "SIM неризедентам, шт",
+        "text": "SIM неризедентам",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -86,7 +86,7 @@
       {
         "emoji": "📊",
         "type": "number",
-        "text": "Фокусные ТП Мегафон, шт",
+        "text": "Фокусные ТП Мегафон",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -95,7 +95,7 @@
       {
         "emoji": "👨‍👨‍👧‍👧",
         "type": "number",
-        "text": "Фокусные ТП Мегафон, шт",
+        "text": "Фокусные ТП Мегафон",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -104,7 +104,7 @@
       {
         "emoji": "💵",
         "type": "money",
-        "text": "СБП, руб",
+        "text": "СБП",
         "unit": 0.0,
         "is_credit": false,
         "have_plan": false,
@@ -113,7 +113,7 @@
       {
         "emoji": "💷",
         "type": "money",
-        "text": "ДП, руб",
+        "text": "ДП",
         "unit": 0.0,
         "is_credit": false,
         "have_plan": false,
@@ -131,7 +131,7 @@
       {
         "emoji": "🔅",
         "type": "number",
-        "text": "VIP ТП, шт",
+        "text": "VIP ТП",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -142,7 +142,7 @@
       {
         "emoji": "📱",
         "type": "number",
-        "text": "Адаптер, шт",
+        "text": "АдаптерИз",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
