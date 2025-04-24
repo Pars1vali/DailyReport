@@ -44,6 +44,7 @@ def send_text(report_data: str, query_request: topic_util.QueryRequest, opio_nam
     set_status(query_request, opio_name, topic_util.char_complete_opio)
 
 def send_report(report_data, photo_need, photo_file, query_request, opio_name):
+    st.write(report_data, photo_need, photo_file, query_request, opio_name)
     if photo_need:
         send_text_with_photo(report_data, photo_file, query_request, opio_name)
     else:

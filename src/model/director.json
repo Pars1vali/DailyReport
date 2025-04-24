@@ -95,15 +95,6 @@
         "divider": "Фокусные ТП"
       },
       {
-        "emoji": "👨‍👨‍👧‍👧",
-        "type": "number",
-        "text": "Фокусные ТП Мегафон",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
         "emoji": "💵",
         "type": "money",
         "text": "СБП",
