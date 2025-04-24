@@ -10,8 +10,9 @@ logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
 
 def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_status: str):
-    report_message_old = report.get_report_message(query_request.message_id, "Отчет о продажах")
     logging.info(f"Set stautus - {char_status} for opio -{opio_name} in report-message.")
+
+    report_message_old = report.get_report_message(query_request.message_id, "Отчет о продажах")
     opio, probability = process.extract(opio_name, topic_util.opio_list, limit=1)[0]
 
     report_message_edit = re.sub(
@@ -19,33 +20,24 @@ def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_stat
         f"{opio} - {char_status}", \
         report_message_old)
 
+    logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
     bot.edit_message_text(chat_id=query_request.chat_id, message_id=query_request.message_id,
                           text=report_message_edit)
 
     report.set_report_message(query_request.message_id, report_message_edit)
-    logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
 
 
 def send_report_with_photo(report_data: str, photo_file, query_request: topic_util.QueryRequest, opio_name):
-    logging.info(f"Create message for report in tg-group. From opio-{opio_name}")
-    message = report.build_detailed_message(opio_name, report_data)
-
     logging.info(f"Send report with check photo. For tg-groupe{query_request.chat_id}.")
-    bot.send_photo(query_request.chat_id, photo=photo_file, caption=message)
 
-    logging.info("Set status ")
+    message = report.build_detailed_message(opio_name, report_data)
+    bot.send_photo(query_request.chat_id, photo=photo_file, caption=message)
     set_status(query_request, opio_name, topic_util.char_complete_opio)
 
 
 def send_report(report_data: str, query_request: topic_util.QueryRequest, opio_name):
-    logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
-    message = report.build_detailed_message(opio_name, report_data)
-
     logging.info(f"Send report. For tg-groupe{query_request.chat_id}.")
-    bot.send_message(query_request.chat_id, text=message)
 
-    logging.info("Set status ")
-    try:
-        set_status(query_request, opio_name, topic_util.char_complete_opio)
-    except Exception as e:
-        logging.error(f"Failure set status. Message-report have the same text. Status for this already there.\n{e}")
+    message = report.build_detailed_message(opio_name, report_data)
+    bot.send_message(query_request.chat_id, text=message)
+    set_status(query_request, opio_name, topic_util.char_complete_opio)

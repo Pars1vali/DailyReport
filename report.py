@@ -34,6 +34,7 @@ def get_report_message(message_id: str, name_report: str):
         logging.info("Create new report-message and load to redis.")
         message_report = create_initial_report(name_report, topic_util.char_none_report_status)
         r.set(message_id, message_report)
+
     return message_report
 
 
@@ -41,11 +42,12 @@ def set_report_message(name, data):
     logging.info("Set new report message in redis storage.")
     r.set(name, data)
 
-def build_detailed_message(opio_name: str, group_topics):
-    logging.info("Create message format tg fro groupe sales.")
+def build_detailed_message(opio_name: str, report_data):
+    logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
+
     message_report = f"Офис = {opio_name}\n"
 
-    for group in group_topics:
+    for group in report_data:
 
         for topic in group:
             message_report += topic["emoji"]
