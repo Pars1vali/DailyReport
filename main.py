@@ -85,8 +85,8 @@ def main():
     model_report = get_model_report(query_request)
 
     with st.form("Отчет"):
-        name_report = model_report.get_report_message("name", "Отчет")
-        photo_need = model_report.get_report_message("photo_need", False)
+        name_report = model_report.get("name", "Отчет")
+        photo_need = model_report.get("photo_need", False)
 
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
