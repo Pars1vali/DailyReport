@@ -1,3 +1,5 @@
+import logging
+
 char_default_status = "➖"
 char_complete_opio = "✅"
 char_stop_opio = "⛔"
@@ -34,3 +36,16 @@ class QueryRequest:
         self.chat_type = chat_type
         self.message_id = message_id
         self.message_date = message_date
+
+    def get_query_quest(self, query_params):
+        try:
+            query_report = QueryRequest(is_url_correct=True)
+            query_report.type_report = query_params["type_report"]
+            query_report.chat_id = query_params["chat_id"]
+            query_report.message_id = query_params["message_id"]
+        except Exception as e:
+            query_report.is_url_correct = False
+            query_report.type_report = "sales"
+            logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
+
+        return query_report

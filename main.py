@@ -7,19 +7,6 @@ from topic import share, credit, plan_fact, number
 
 logging.getLogger().setLevel(logging.INFO)
 
-def get_query_info():
-    try:
-        query_report = topic_util.QueryRequest(is_url_correct=True)
-        query_report.type_report = st.query_params["type_report"]
-        query_report.chat_id = st.query_params["chat_id"]
-        query_report.message_id = st.query_params["message_id"]
-    except Exception as e:
-        query_report.is_url_correct = False
-        query_report.type_report = "sales"
-        logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
-
-    return query_report
-
 def get_model_report(query_report: topic_util.QueryRequest):
     if query_report.type_report == "director":
         src_path = "src/model/director.json"
@@ -49,17 +36,8 @@ def build_report_form(model_report):
 
     return report_data
 
-def send_report(report_data, photo_need, photo_file, query_request, opio_name):
-    if photo_need:
-        bot.send_report_with_photo(report_data, photo_file, query_request, opio_name)
-    else:
-        bot.send_report(report_data, query_request, opio_name)
-
-    st.success("Отчет отправлен!")
-    st.balloons()
-
 def main():
-    query_request = get_query_info()
+    query_request = topic_util.get_query_quest(st.query_params)
     model_report = get_model_report(query_request)
 
     with st.form("Отчет"):
@@ -82,7 +60,9 @@ def main():
             elif photo_need and photo_file is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                send_report(report_data, photo_need, photo_file, query_request, opio_name)
+                bot.send_report(report_data, photo_need, photo_file, query_request, opio_name)
+                st.success("Отчет отправлен!")
+                st.balloons()
 
 
 if __name__ == "__main__":

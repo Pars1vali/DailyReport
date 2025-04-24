@@ -1,3 +1,4 @@
+import streamlit as st
 import os, logging, re
 import telebot
 import topic_util, report
@@ -27,7 +28,7 @@ def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_stat
     report.set_report_message(query_request.message_id, report_message_edit)
 
 
-def send_report_with_photo(report_data: str, photo_file, query_request: topic_util.QueryRequest, opio_name):
+def send_text_with_photo(report_data: str, photo_file, query_request: topic_util.QueryRequest, opio_name):
     logging.info(f"Send report with check photo. For tg-groupe{query_request.chat_id}.")
 
     message = report.build_detailed_message(opio_name, report_data)
@@ -35,9 +36,15 @@ def send_report_with_photo(report_data: str, photo_file, query_request: topic_ut
     set_status(query_request, opio_name, topic_util.char_complete_opio)
 
 
-def send_report(report_data: str, query_request: topic_util.QueryRequest, opio_name):
+def send_text(report_data: str, query_request: topic_util.QueryRequest, opio_name):
     logging.info(f"Send report. For tg-groupe{query_request.chat_id}.")
 
     message = report.build_detailed_message(opio_name, report_data)
     bot.send_message(query_request.chat_id, text=message)
     set_status(query_request, opio_name, topic_util.char_complete_opio)
+
+def send_report(report_data, photo_need, photo_file, query_request, opio_name):
+    if photo_need:
+        bot.send_text_with_photo(report_data, photo_file, query_request, opio_name)
+    else:
+        bot.send_text(report_data, query_request, opio_name)
