@@ -1,62 +1,67 @@
-import logging, datetime, os
+import os
+import logging
+import datetime
 import redis
-import group
-from group import char_attention, opio_list
-
-r = redis.Redis(
-    host=os.getenv("REDIS_IP"),
-    port=os.getenv("REDIS_PORT"),
-    username=os.getenv("REDIS_USER"),
-    password=os.getenv("REDIS_PASSWORD")
-)
-
-def create(name: str, char_status):
-    logging.info(f"Create report with name - {name}")
-    date_now = datetime.datetime.now()
-    report_message = f"{date_now.day:0>2}.{date_now.month:0>2} ️\n"
-    report_message += f"{char_attention} {name} {char_attention}\n"
-    report_message += '\n'.join([f'{opio} - {char_status}' for opio in opio_list])
-
-    return report_message
+from typing import List
+import topic_util
 
 
-def get(name):
-    logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {name}")
-    message_report_exists = r.exists(name)
-    logging.info(f"Report-message in redis storage {message_report_exists}.")
-    if message_report_exists:
-        logging.info("Get message-report from redis.")
-        message_report_data = r.get(name)
-        message_report = message_report_data.decode("utf-8")
-    else:
-        logging.info("Create new report-message and load to redis.")
-        message_report = create("Отчет о продажах", group.char_none_report_status)
-        r.set(name, message_report)
-    return message_report
+class ReportService:
+    def __init__(self):
+        redis_host = os.getenv("REDIS_IP")
+        redis_port = int(os.getenv("REDIS_PORT", 6379))
+        redis_user = os.getenv("REDIS_USER")
+        redis_password = os.getenv("REDIS_PASSWORD")
 
+        if not redis_host:
+            raise ValueError("REDIS_IP не задан")
 
-def create_message(opio_name: str, group_topics):
-    logging.info("Create message format tg fro groupe sales.")
-    message_report = f"Офис = {opio_name}\n"
-    for group in group_topics:
-        # message_report +="\n"
-        for topic in group:
-            message_report += topic["emoji"]
-            if topic["have_plan"] is True:
-                text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} - {value["plan"]}/{value["fact"]}\n'
-            elif topic["is_credit"] is True:
-                text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} - {value["loan_apply"]}/{value["approved"]}/{value["issued"]}\n'
-            elif topic["share"] is True:
-                text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} - {value["value_1"]}/{value["value_2"]}/{value["share"]}%\n'
-            else:
-                message_report += f'\t{topic["text"]} - {topic["value"]}\n'
+        self.redis = redis.Redis(
+            host=redis_host,
+            port=redis_port,
+            username=redis_user,
+            password=redis_password
+        )
 
-    return message_report
+    def get_report_message(self, name: str) -> str:
+        logging.info(f"Получение отчета из Redis по ключу: {name}")
+        if self.redis.exists(name):
+            message = self.redis.get(name).decode("utf-8")
+            logging.info("Сообщение найдено в Redis")
+        else:
+            logging.info("Создание нового сообщения и сохранение в Redis")
+            message = self.build_initial_report(name, topic_util.char_none_report_status)
+            self.redis.set(name, message)
+        return message
 
+    def set_report_message(self, name: str, data: str) -> None:
+        logging.info(f"Сохранение отчета в Redis по ключу: {name}")
+        self.redis.set(name, data)
 
-def set(name, data):
-    logging.info("Set new report message in redis storage.")
-    r.set(name, data)
+    def build_initial_report(self, name: str, char_status: str) -> str:
+        logging.info(f"Создание начального отчета с именем: {name}")
+        date_now = datetime.datetime.now()
+        report_message = f"{date_now.day:02}.{date_now.month:02} ️\n"
+        report_message += f"{topic_util.char_attention} {name} {topic_util.char_attention}\n"
+        report_message += '\n'.join([f'{opio} - {char_status}' for opio in topic_util.opio_list])
+        return report_message
+
+    def build_detailed_report(self, opio_name: str, group_topics: List[List[dict]]) -> str:
+        logging.info("Формирование детализированного сообщения")
+        message_report = f"Офис = {opio_name}\n"
+        for group in group_topics:
+            for topic in group:
+                message_report += topic["emoji"]
+                text = topic["text"]
+                value = topic["value"]
+
+                if topic.get("have_plan"):
+                    message_report += f'\t{text} - {value["plan"]}/{value["fact"]}\n'
+                elif topic.get("is_credit"):
+                    message_report += f'\t{text} - {value["loan_apply"]}/{value["approved"]}/{value["issued"]}\n'
+                elif topic.get("share"):
+                    message_report += f'\t{text} - {value["value_1"]}/{value["value_2"]}/{value["share"]}%\n'
+                else:
+                    message_report += f'\t{text} - {value}\n'
+
+        return message_report

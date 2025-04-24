@@ -26,9 +26,9 @@ opio_list = list([
 ])
 
 
-class QueryReport:
-    def __init__(self, url_correct: bool, chat_id=None, chat_type=None, message_id=None, message_date=None, type_report=None):
-        self.url_correct = url_correct
+class QueryRequest:
+    def __init__(self, is_url_correct: bool, chat_id=None, chat_type=None, message_id=None, message_date=None, type_report=None):
+        self.is_url_correct = is_url_correct
         self.type_report = type_report
         self.chat_id = chat_id
         self.chat_type = chat_type
