@@ -10,7 +10,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 def get_query_info():
     try:
-        query_report = topic_util.QueryReport(url_correct=True)
+        query_report = topic_util.QueryRequest(url_correct=True)
         query_report.type_report = st.query_params["type_report"]
         query_report.chat_id = st.query_params["chat_id"]
         query_report.message_id = st.query_params["message_id"]
@@ -21,7 +21,7 @@ def get_query_info():
 
     return query_report
 
-def get_model_report(query_report: topic_util.QueryReport):
+def get_model_report(query_report: topic_util.QueryRequest):
     if query_report.type_report == "director":
         src_path = "src/model/director.json"
     else:
