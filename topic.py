@@ -55,21 +55,23 @@ def plan_fact(topic, index):
 def share(topic, index):
     text_topic = f'{topic["text"]} %'
     emoji = topic.get("emoji", "🟢")
-    st.markdown(f"**{text_topic}**")
+    divisible_text = topic.get("divisible", "Число 1")
+    divider_text = topic.get("divider", "Число 2")
 
+    st.markdown(f"**{text_topic}**")
     col1, col2 = st.columns(2)
     with col1:
-        value_1 = st.number_input("Число_1", value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
+        divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
     with col2:
-        value_2 = st.number_input("Число_2", value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
+        divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
 
-    share = int((value_2 * 100) / (value_1)) if value_1 else 0
+    share = int((divider * 100) / (divisible)) if divisible else 0
     return {
         "text": text_topic,
         "emoji": emoji,
         "value": {
-            "value_1": value_1,
-            "value_2": value_2,
+            "divisible": divisible,
+            "divider": divider,
             "share": share
         },
         "is_credit": False,

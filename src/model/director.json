@@ -90,7 +90,9 @@
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
-        "share": true
+        "share": true,
+        "divisible": "Всего SIM",
+        "divider": "Фокусные ТП"
       },
       {
         "emoji": "👨‍👨‍👧‍👧",
@@ -108,7 +110,9 @@
         "unit": 0.0,
         "is_credit": false,
         "have_plan": false,
-        "share": true
+        "share": true,
+        "divisible": "Всего Безналичные",
+        "divider": "Оплата по CБП"
       },
       {
         "emoji": "💷",

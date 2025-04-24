@@ -58,7 +58,7 @@ def build_detailed_message(opio_name: str, group_topics):
                 message_report += f'\t{text} - {value["loan_apply"]}/{value["approved"]}/{value["issued"]}\n'
             elif topic["share"] is True:
                 text, value = topic["text"], topic["value"]
-                message_report += f'\t{text} - {value["value_1"]}/{value["value_2"]}/{value["share"]}%\n'
+                message_report += f'\t{text} - {value["divisible"]}/{value["divider"]}/{value["share"]}%\n'
             else:
                 message_report += f'\t{topic["text"]} - {topic["value"]}\n'
 
