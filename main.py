@@ -30,12 +30,12 @@ def get_model_report(query_request: topic_util.QueryRequest):
 
     return model_report
 
-def get_photo(photo_need: bool):
-    photo = None
-    if photo_need:
-        photo = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
-
-    return photo
+# def get_photo(photo_need: bool):
+#     photo = None
+#     if photo_need:
+#         photo = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
+#
+#     return photo
 
 def send_report(opio_name: str, photo_need: bool, photo_file, query_request, report_data):
     if not query_request.is_url_correct:
@@ -90,7 +90,7 @@ def main():
 
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
-        photo_file = get_photo(photo_need)
+        photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"], disabled=not photo_need)
 
         report_data = build_report_groups(model_report)
 
