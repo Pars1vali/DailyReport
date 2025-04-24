@@ -29,7 +29,8 @@ opio_list = list([
 
 
 class QueryRequest:
-    def __init__(self, is_url_correct: bool, chat_id=None, chat_type=None, message_id=None, message_date=None, type_report=None):
+    def __init__(self, is_url_correct: bool, chat_id=None, chat_type=None, message_id=None, message_date=None,
+                 type_report=None):
         self.is_url_correct = is_url_correct
         self.type_report = type_report
         self.chat_id = chat_id
@@ -37,15 +38,16 @@ class QueryRequest:
         self.message_id = message_id
         self.message_date = message_date
 
-    def get_query_quest(self, query_params):
-        try:
-            query_report = QueryRequest(is_url_correct=True)
-            query_report.type_report = query_params["type_report"]
-            query_report.chat_id = query_params["chat_id"]
-            query_report.message_id = query_params["message_id"]
-        except Exception as e:
-            query_report.is_url_correct = False
-            query_report.type_report = "sales"
-            logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
 
-        return query_report
+def get_query_quest(query_params):
+    try:
+        query_report = QueryRequest(is_url_correct=True)
+        query_report.type_report = query_params["type_report"]
+        query_report.chat_id = query_params["chat_id"]
+        query_report.message_id = query_params["message_id"]
+    except Exception as e:
+        query_report.is_url_correct = False
+        query_report.type_report = "sales"
+        logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
+
+    return query_report

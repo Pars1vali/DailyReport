@@ -40,10 +40,10 @@ def main():
     query_request = topic_util.get_query_quest(st.query_params)
     model_report = get_model_report(query_request)
 
-    with st.form("Отчет"):
-        name_report = model_report.get("name", "Отчет")
-        photo_need = model_report.get("photo_need", False)
+    photo_need = model_report.get("photo_need", False)
+    name_report = model_report.get("name", "Отчет")
 
+    with st.form("Отчет"):
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
         photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
