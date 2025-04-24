@@ -22,30 +22,25 @@ def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_stat
         report_message_old)
 
     logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
-    bot.edit_message_text(chat_id=query_request.chat_id, message_id=query_request.message_id,
-                          text=report_message_edit)
+    bot.edit_message_text(chat_id=query_request.chat_id, message_id=query_request.message_id, text=report_message_edit)
 
     report.set_report_message(query_request.message_id, report_message_edit)
 
 
-def send_text_with_photo(report_data: str, photo_file, query_request: topic_util.QueryRequest, opio_name):
+def send_text_with_photo(message: str, photo_file, query_request: topic_util.QueryRequest):
     logging.info(f"Send report with check photo. For tg-groupe{query_request.chat_id}.")
-
-    message = report.build_detailed_message(opio_name, report_data)
     bot.send_photo(query_request.chat_id, photo=photo_file, caption=message)
-    set_status(query_request, opio_name, topic_util.char_complete_opio)
 
-
-def send_text(report_data: str, query_request: topic_util.QueryRequest, opio_name):
+def send_text(message: str, query_request: topic_util.QueryRequest):
     logging.info(f"Send report. For tg-groupe{query_request.chat_id}.")
-
-    message = report.build_detailed_message(opio_name, report_data)
     bot.send_message(query_request.chat_id, text=message)
-    set_status(query_request, opio_name, topic_util.char_complete_opio)
 
 def send_report(report_data, photo_need, photo_file, query_request, opio_name):
-    st.write(report_data, photo_need, photo_file, query_request, opio_name)
+    message = report.build_detailed_message(opio_name, report_data)
+
     if photo_need:
-        send_text_with_photo(report_data, photo_file, query_request, opio_name)
+        send_text_with_photo(message, photo_file, query_request)
     else:
-        send_text(report_data, query_request, opio_name)
+        send_text(message, query_request)
+
+    set_status(query_request, opio_name, topic_util.char_complete_opio)
