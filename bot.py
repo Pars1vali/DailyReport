@@ -10,6 +10,11 @@ chat_id = os.getenv("GROUP_CHAT_ID")
 logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
 
+st.set_page_config(
+        page_title="Отчеты МегаФон",
+)
+
+
 def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_status: str):
     logging.info(f"Set stautus - {char_status} for opio -{opio_name} in report-message.")
 
