@@ -45,6 +45,6 @@ def send_text(report_data: str, query_request: topic_util.QueryRequest, opio_nam
 
 def send_report(report_data, photo_need, photo_file, query_request, opio_name):
     if photo_need:
-        bot.send_text_with_photo(report_data, photo_file, query_request, opio_name)
+        send_text_with_photo(report_data, photo_file, query_request, opio_name)
     else:
-        bot.send_text(report_data, query_request, opio_name)
+        send_text(report_data, query_request, opio_name)
