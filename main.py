@@ -68,11 +68,11 @@ def build_report_groups(model_report):
     for index_group, group in enumerate(model_report["topics"]):
         group_unit = []
         for index_topic, topic in enumerate(group):
-            if topic.get_report_message("is_credit"):
+            if topic["is_credit"] is True:
                 group_unit.append(credit(topic, index_topic))
-            elif topic.get_report_message("have_plan"):
+            elif topic["have_plan"] is True:
                 group_unit.append(plan_fact(topic, index_group))
-            elif topic.get_report_message("share"):
+            elif topic["share"] is True:
                 group_unit.append(share(topic, index_topic))
             else:
                 group_unit.append(number(topic, index_group, index_topic))
