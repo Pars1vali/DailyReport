@@ -7,6 +7,10 @@ from topic import share, credit, plan_fact, number
 
 logging.getLogger().setLevel(logging.INFO)
 
+st.set_page_config(
+        page_title="Отчеты МегаФон",
+)
+
 def get_model_report(query_report: topic_util.QueryRequest):
     if query_report.type_report == "director":
         src_path = "src/model/director.json"
