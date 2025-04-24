@@ -64,6 +64,5 @@ def main():
                 st.success("Отчет отправлен!")
                 st.balloons()
 
-
 if __name__ == "__main__":
     main()

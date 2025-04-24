@@ -22,6 +22,7 @@ def set_status(query_request: topic_util.QueryRequest, opio_name: str, char_stat
         report_message_old)
 
     logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
+    logging.info(f"{report_message_edit == report_message_old}")
     bot.edit_message_text(chat_id=query_request.chat_id, message_id=query_request.message_id, text=report_message_edit)
 
     report.set_report_message(query_request.message_id, report_message_edit)
@@ -44,3 +45,4 @@ def send_report(report_data, photo_need, photo_file, query_request, opio_name):
         send_text(message, query_request)
 
     set_status(query_request, opio_name, topic_util.char_complete_opio)
+
