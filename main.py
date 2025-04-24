@@ -10,12 +10,12 @@ logging.getLogger().setLevel(logging.INFO)
 
 def get_query_info():
     try:
-        query_report = topic_util.QueryRequest(url_correct=True)
+        query_report = topic_util.QueryRequest(is_url_correct=True)
         query_report.type_report = st.query_params["type_report"]
         query_report.chat_id = st.query_params["chat_id"]
         query_report.message_id = st.query_params["message_id"]
     except Exception as e:
-        query_report.url_correct = False
+        query_report.is_url_correct = False
         query_report.type_report = "sales"
         logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
 
@@ -62,7 +62,7 @@ def main():
         send = st.form_submit_button("Отправить", use_container_width=True)
 
         if send:
-            if query_report.url_correct is False:
+            if query_report.is_url_correct is False:
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif opio_name is None:
                 st.warning("Необходимо выбрать название ОПиО")
