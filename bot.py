@@ -23,15 +23,13 @@ def set_status(query_report: group.QueryReport, opio_name: str, char_status: str
     logging.info(f"Edit message-report. Report from {opio} complete. Set status - {char_status}")
 
 
-def send_report(report_data: str, photo_need, photo_cheque, query_report: group.QueryReport, opio_name):
+def send_report(report_data: str, photo_cheque, query_report: group.QueryReport, opio_name):
     logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
     message = report.create_message(opio_name, report_data)
-    logging.info(f"Send report for sales with check photo. For tg-groupe{query_report.chat_id}.")
 
-    if photo_need:
-        bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message)
-    else:
-        bot.send_message(query_report.chat_id, text=message)
+    logging.info(f"Send report for sales with check photo. For tg-groupe{query_report.chat_id}.")
+    bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message)
+
 
     logging.info("Set status ")
     try:

@@ -32,20 +32,6 @@ def get_model_report(query_report: group.QueryReport):
 
     return model_report
 
-def send_report(report_data, photo_need, photo_cheque, query_report, opio_name):
-    if query_report.url_correct is False:
-        st.error("Неверная ссылка. Отправить отчет не удастся.")
-    elif opio_name is None:
-        st.warning("Необходимо выбрать название ОПиО")
-    elif photo_cheque is None:
-        st.warning("Необходимо загрузить фото отчета без гашения")
-    else:
-        bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-        st.success("Отчет отправлен!")
-        st.balloons()
-
-
-
 def main():
     query_report = get_query_info()
     model_report = get_model_report(query_report)
@@ -72,21 +58,18 @@ def main():
                     group_unit.append(number(topic, index_group, index_topic))
 
 
-        send = st.form_submit_button("Отправить", use_container_width=True, on_click=send_report, args=[report_data, photo_need, photo_cheque, query_report, opio_name])
-
-        # if send:
-        #     if query_report.url_correct is False:
-        #         st.error("Неверная ссылка. Отправить отчет не удастся.")
-        #     else:
-        #         bot.send_report_v2(report_data, photo_need, photo_cheque, query_report, opio_name)
-            # elif opio_name is None:
-            #     st.warning("Необходимо выбрать название ОПиО")
-            # elif photo_cheque is None:
-            #     st.warning("Необходимо загрузить фото отчета без гашения")
-            # else:
-            #     bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-            #     st.success("Отчет отправлен!")
-            #     st.balloons()
+        send = st.form_submit_button("Отправить", use_container_width=True)
+        if send:
+            if query_report.url_correct is False:
+                st.error("Неверная ссылка. Отправить отчет не удастся.")
+            elif opio_name is None:
+                st.warning("Необходимо выбрать название ОПиО")
+            elif photo_cheque is None:
+                st.warning("Необходимо загрузить фото отчета без гашения")
+            else:
+                bot.send_report(report_data, photo_cheque, query_report, opio_name)
+                st.success("Отчет отправлен!")
+                st.balloons()
 
 
 if __name__ == "__main__":
