@@ -1,6 +1,6 @@
 {
   "name": "Отчет о продажах",
-  "photo_must": true,
+  "photo_need": true,
   "topics": [
     [
       {

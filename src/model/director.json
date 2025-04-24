@@ -1,6 +1,6 @@
 {
   "name": "Отчет для руководителей",
-  "photo_must": false,
+  "photo_need": false,
   "topics": [
     [
       {
