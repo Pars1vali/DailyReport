@@ -90,7 +90,7 @@ def main():
 
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
-        photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"], disabled=not photo_need)
+        photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"], disabled=True)
 
         report_data = build_report_groups(model_report)
 
