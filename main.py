@@ -30,13 +30,6 @@ def get_model_report(query_request: topic_util.QueryRequest):
 
     return model_report
 
-# def get_photo(photo_need: bool):
-#     photo = None
-#     if photo_need:
-#         photo = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
-#
-#     return photo
-
 def send_report(opio_name: str, photo_need: bool, photo_file, query_request, report_data):
     if not query_request.is_url_correct:
         st.error("Неверная ссылка. Отправить отчет не удастся.")
@@ -65,9 +58,12 @@ def send_report(opio_name: str, photo_need: bool, photo_file, query_request, rep
 
 def build_report_groups(model_report):
     report_data = []
+
     for index_group, group in enumerate(model_report["topics"]):
         group_unit = []
+
         for index_topic, topic in enumerate(group):
+
             if topic["is_credit"] is True:
                 group_unit.append(credit(topic, index_topic))
             elif topic["have_plan"] is True:
@@ -76,7 +72,9 @@ def build_report_groups(model_report):
                 group_unit.append(share(topic, index_topic))
             else:
                 group_unit.append(number(topic, index_group, index_topic))
+
         report_data.append(group_unit)
+
     return report_data
 
 
@@ -90,7 +88,7 @@ def main():
 
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
-        photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"], disabled=True)
+        photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"], disabled=not photo_need)
 
         report_data = build_report_groups(model_report)
 
