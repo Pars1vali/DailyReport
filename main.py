@@ -1,9 +1,9 @@
 import json
 import streamlit as st
 import logging
-import bot, topic_util, topic, report
-from topic_util import opio_list, char_complete_opio
+import bot, opio
 from topic import share, credit, plan_fact, number
+from opio import QueryRequest
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -11,8 +11,8 @@ st.set_page_config(
         page_title="Отчеты МегаФон",
 )
 
-def get_model_report(query_report: topic_util.QueryRequest):
-    if query_report.type_report == "director":
+def get_model_report(query_request: QueryRequest):
+    if query_request.type_report == "director":
         src_path = "src/model/director.json"
     else:
         src_path = "src/model/sales.json"
@@ -41,7 +41,7 @@ def build_report_form(model_report):
     return report_data
 
 def main():
-    query_request = topic_util.get_query_quest(st.query_params)
+    query_request = QueryRequest.create(st.query_params)
     model_report = get_model_report(query_request)
 
     photo_need = model_report.get("photo_need", False)
@@ -49,7 +49,7 @@ def main():
 
     with st.form("Отчет"):
         st.subheader(name_report)
-        opio_name = st.selectbox("Название вашего ОПиО", opio_list, index=None, placeholder="ОПиО")
+        opio_name = st.selectbox("Название вашего ОПиО", opio.get_opio_list(), index=None, placeholder="ОПиО")
         photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
         report_data = build_report_form(model_report)
