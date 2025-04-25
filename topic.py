@@ -1,23 +1,24 @@
 import streamlit as st
 
-def credit(topic, index):
-    text_topic = f'{topic["text"]} (заявки/одобрено/выдано)'
+
+def credit(topic):
+    topic_text = f'{topic["text"]} (заявки/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
-    st.markdown(f"**{text_topic}**")
+    st.markdown(f"**{topic_text}**")
 
     col1, col2, col3 = st.columns(3)
     with col1:
         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
-                                     key=f"{index}loan_apply")
+                                     key=f"{id(topic)}loan_apply")
     with col2:
         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
-                                   key=f"{index}approved")
+                                   key=f"{id(topic)}approved")
     with col3:
         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
-                                 key=f"{index}issued")
+                                 key=f"{id(topic)}issued")
 
     return {
-        "text": text_topic,
+        "text": topic_text,
         "emoji": emoji,
         "value": {
             "loan_apply": loan_apply,
@@ -29,19 +30,20 @@ def credit(topic, index):
         "share": False
     }
 
-def plan_fact(topic, index):
-    text_topic = f'{topic["text"]} (план/факт)'
+
+def plan_fact(topic):
+    topic_text = f'{topic["text"]} (план/факт)'
     emoji = topic.get("emoji", "🟢")
-    st.markdown(f"**{text_topic}**")
+    st.markdown(f"**{topic_text}**")
 
     col1, col2 = st.columns(2)
     with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
+        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{id(topic)}plan")
     with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
+        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{id(topic)}fact")
 
     return {
-        "text": text_topic,
+        "text": topic_text,
         "emoji": emoji,
         "value": {
             "plan": plan,
@@ -52,46 +54,53 @@ def plan_fact(topic, index):
         "share": False
     }
 
-def share(topic, index):
-    text_topic = f'{topic["text"]} %'
+
+def share(topic: dict) -> dict:
+    topic_text = f'{topic["text"]} %'
     emoji = topic.get("emoji", "🟢")
     divisible_text = topic.get("divisible", "Число 1")
     divider_text = topic.get("divider", "Число 2")
 
-    st.markdown(f"**{text_topic}**")
+    st.markdown(f"**{topic_text}**")
     col1, col2 = st.columns(2)
     with col1:
-        divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], key=f"{index}plan")
+        divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], key=f"{id(topic)}plan")
     with col2:
-        divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], key=f"{index}fact")
+        divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], key=f"{id(topic)}fact")
 
-    share = int((divider * 100) / (divisible)) if divisible else 0
+    share_value = int((divider * 100) / (divisible)) if divisible else 0
     return {
-        "text": text_topic,
+        "text": topic_text,
         "emoji": emoji,
         "value": {
             "divisible": divisible,
             "divider": divider,
-            "share": share
+            "share": share_value
         },
         "is_credit": False,
         "have_plan": False,
         "share": True
     }
 
-def number(topic, index_group, index_topic):
-    unit = "руб" if topic["type"] == "money" else "шт"
-    text_topic = f'{topic["text"]}, {unit}'
-    value_topic = st.number_input( text_topic, value=topic["unit"],
-                                  min_value=topic["unit"], key=f"{index_group}_{index_topic}_number")
+
+def number(topic: dict) -> dict:
+    topic_type = topic.get("type", "number")
+    unit_name = "руб." if topic_type == "money" else "шт."
+    unit_value = topic.get("unit", 0)
+    topic_text = f'{topic["text"]}, {unit_name}'
     emoji = topic.get("emoji", "🟢")
 
+    value_topic = st.number_input(text=topic_text,
+                                  value=unit_value,
+                                  min_value=unit_value,
+                                  key=f"{id(topic)}_number")
+
+
     return {
-        "text": topic["text"],
+        "text": topic_text,
         "emoji": emoji,
         "value": value_topic,
         "is_credit": False,
         "have_plan": False,
         "share": False
     }
-

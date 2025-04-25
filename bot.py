@@ -2,7 +2,7 @@ import os, logging, re
 import telebot
 import opio, report
 from thefuzz import process
-from opio import CharStatus
+from opio import Status
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 chat_id = os.getenv("GROUP_CHAT_ID")
@@ -20,7 +20,7 @@ def set_status(query_request: opio.QueryRequest, opio_name: str, char_status: st
         opio_choose_name, probability = process.extract(opio_name, opio.get_opio_list(), limit=1)[0]
 
         report_message_edit = re.sub(
-            f'{opio_choose_name} - [{CharStatus.complete}{CharStatus.time}{CharStatus.default}{CharStatus.stop}{CharStatus.none}]', \
+            f'{opio_choose_name} - [{Status.complete}{Status.time}{Status.default}{Status.stop}{Status.none}]', \
             f"{opio_choose_name} - {char_status}", \
             report_message_old)
 
@@ -42,7 +42,7 @@ def send_text(message: str, query_request: opio.QueryRequest):
 
 def send_report(report_data, photo_need, photo_file, query_request, opio_name):
     message = report.build_detailed_message(opio_name, report_data)
-    is_status_set = set_status(query_request, opio_name, CharStatus.complete)
+    is_status_set = set_status(query_request, opio_name, Status.complete)
     is_report_send = True
 
     if is_status_set is False:

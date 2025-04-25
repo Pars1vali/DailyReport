@@ -1,8 +1,9 @@
-import logging
+import logging, json
 from dataclasses import dataclass
 
+
 @dataclass
-class CharStatus():
+class Status:
     default: str = "➖",
     complete: str = "✅",
     stop: str = "⛔",
@@ -17,6 +18,7 @@ class QueryRequest:
         self.type_report = type_report
         self.chat_id = chat_id
         self.message_id = message_id
+
 
     @staticmethod
     def create(query_params: list):

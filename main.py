@@ -8,7 +8,7 @@ from opio import QueryRequest
 logging.getLogger().setLevel(logging.INFO)
 
 st.set_page_config(
-        page_title="Отчеты МегаФон",
+        page_title="МегаФон",
 )
 
 def get_model_report(query_request: QueryRequest):
@@ -25,18 +25,20 @@ def get_model_report(query_request: QueryRequest):
 def build_report_form(model_report):
     report_data = list()
 
-    for index_group, group in enumerate(model_report["topics"]):
+    for group in model_report["topics"]:
         group_unit = list()
         report_data.append(group_unit)
-        for index_topic, topic in enumerate(group):
+
+        for topic in group:
+
             if topic["is_credit"] is True:
-                group_unit.append(credit(topic, index_topic))
+                group_unit.append(credit(topic))
             elif topic["have_plan"] is True:
-                group_unit.append(plan_fact(topic, index_group))
+                group_unit.append(plan_fact(topic))
             elif topic["share"] is True:
-                group_unit.append(share(topic, index_topic))
+                group_unit.append(share(topic))
             else:
-                group_unit.append(number(topic, index_group, index_topic))
+                group_unit.append(number(topic))
 
     return report_data
 
