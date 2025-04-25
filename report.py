@@ -1,7 +1,9 @@
-import logging, datetime, os
+import logging, datetime, os, re
 import redis
+from thefuzz import process
 import topic_util
 from topic_util import char_attention, opio_list
+from topic_util import char_complete_opio, char_time_status, char_default_status, char_stop_opio, char_none_report_status
 
 r = redis.Redis(
     host=os.getenv("REDIS_IP"),
@@ -41,6 +43,7 @@ def get_report_message(message_id: str, name_report: str):
 def set_report_message(name, data):
     logging.info("Set new report message in redis storage.")
     r.set(name, data)
+
 
 def build_detailed_message(opio_name: str, report_data):
     logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
