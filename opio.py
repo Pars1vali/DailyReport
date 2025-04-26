@@ -1,7 +1,6 @@
 import logging, json
 from dataclasses import dataclass
 
-
 @dataclass
 class Status:
     default: str = "➖",
@@ -10,6 +9,8 @@ class Status:
     attention: str = "❗",
     time: str = "⌛",
     none: str = "❌"
+
+
 
 class QueryRequest:
 
@@ -54,3 +55,15 @@ def get_opio_list():
         "Усть-Лабинск Ленина",
         "Усть-Лабинск Ободовского"
     ])
+
+
+def get_report_config(query_request: QueryRequest):
+    if query_request.type_report == "director":
+        src_path = "src/model/director.json"
+    else:
+        src_path = "src/model/sales.json"
+
+    with open(src_path, encoding='utf-8') as file:
+        model_report = json.load(file)
+
+    return model_report

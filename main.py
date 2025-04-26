@@ -1,8 +1,6 @@
-import json
 import streamlit as st
 import logging
-import bot, opio
-from topic import share, credit, plan_fact, number
+import bot, opio, form
 from opio import QueryRequest
 
 logging.getLogger().setLevel(logging.INFO)
@@ -11,50 +9,19 @@ st.set_page_config(
         page_title="МегаФон",
 )
 
-def get_model_report(query_request: QueryRequest):
-    if query_request.type_report == "director":
-        src_path = "src/model/director.json"
-    else:
-        src_path = "src/model/sales.json"
-
-    with open(src_path, encoding='utf-8') as file:
-        model_report = json.load(file)
-
-    return model_report
-
-def build_report_form(model_report):
-    report_data = list()
-
-    for group in model_report["topics"]:
-        group_unit = list()
-        report_data.append(group_unit)
-
-        for topic in group:
-
-            if topic["is_credit"] is True:
-                group_unit.append(credit(topic))
-            elif topic["have_plan"] is True:
-                group_unit.append(plan_fact(topic))
-            elif topic["share"] is True:
-                group_unit.append(share(topic))
-            else:
-                group_unit.append(number(topic))
-
-    return report_data
-
 def main():
     query_request = QueryRequest.create(st.query_params)
-    model_report = get_model_report(query_request)
+    config_report = opio.get_report_config(query_request)
 
-    photo_need = model_report.get("photo_need", False)
-    name_report = model_report.get("name", "Отчет")
+    photo_need = config_report.get("photo_need", False)
+    name_report = config_report.get("name", "Отчет")
 
     with st.form("Отчет"):
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", opio.get_opio_list(), index=None, placeholder="ОПиО")
         photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
-        report_data = build_report_form(model_report)
+        report_data = form.create_form(config_report)
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 

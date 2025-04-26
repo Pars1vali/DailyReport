@@ -1,7 +1,7 @@
 {
   "name": "Отчет о продажах",
   "photo_need": true,
-  "topics": [
+  "schema": [
     [
       {
         "emoji": "1️⃣",
