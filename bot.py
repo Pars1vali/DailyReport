@@ -32,14 +32,6 @@ def set_status(query_request: opio.QueryRequest, opio_name: str, char_status: st
         return False
 
 
-def send_text_with_photo(message: str, photo_file, query_request: opio.QueryRequest):
-    logging.info(f"Send report with check photo. For tg-groupe{query_request.chat_id}.")
-    bot.send_photo(query_request.chat_id, photo=photo_file, caption=message)
-
-def send_text(message: str, query_request: opio.QueryRequest):
-    logging.info(f"Send report. For tg-groupe{query_request.chat_id}.")
-    bot.send_message(query_request.chat_id, text=message)
-
 def send_report(report_data, photo_need, photo_file, query_request, opio_name):
     message = report.build_detailed_message(opio_name, report_data)
     is_status_set = set_status(query_request, opio_name, Status.complete)
@@ -50,8 +42,10 @@ def send_report(report_data, photo_need, photo_file, query_request, opio_name):
         return False
 
     if photo_need:
-        send_text_with_photo(message, photo_file, query_request)
+        logging.info(f"Send report with check photo. For tg-groupe{query_request.chat_id}.")
+        bot.send_photo(query_request.chat_id, photo=photo_file, caption=message)
     else:
-        send_text(message, query_request)
+        logging.info(f"Send report. For tg-groupe{query_request.chat_id}.")
+        bot.send_message(query_request.chat_id, text=message)
 
     return is_report_send

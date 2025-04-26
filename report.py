@@ -10,7 +10,7 @@ r = redis.Redis(
     password=os.getenv("REDIS_PASSWORD")
 )
 
-def create_initial_report(name: str, char_status):
+def create_report_message(name: str, char_status):
     logging.info(f"Create report with name - {name}")
     date_now = datetime.datetime.now()
 
@@ -32,7 +32,7 @@ def get_report_message(message_id: str, name_report: str):
         message_report = message_report_data.decode("utf-8")
     else:
         logging.info("Create new report-message and load to redis.")
-        message_report = create_initial_report(name_report, opio.char_none_report_status)
+        message_report = create_report_message(name_report, opio.char_none_report_status)
         r.set(message_id, message_report)
 
     return message_report
@@ -52,18 +52,16 @@ def build_detailed_message(opio_name: str, report_data):
 
         for topic in group:
             message_report += topic["emoji"]
+            text, value = topic["text"], topic["value"]
 
             if topic["have_plan"] is True:
-                text, value = topic["text"], topic["value"]
                 message_report += f'\t{text} - {value["plan"]}/{value["fact"]}\n'
             elif topic["is_credit"] is True:
-                text, value = topic["text"], topic["value"]
                 message_report += f'\t{text} - {value["loan_apply"]}/{value["approved"]}/{value["issued"]}\n'
             elif topic["share"] is True:
-                text, value = topic["text"], topic["value"]
                 message_report += f'\t{text} - {value["divisible"]}/{value["divider"]}/{value["share"]}%\n'
             else:
-                message_report += f'\t{topic["text"]} - {topic["value"]}\n'
+                message_report += f'\t{text} - {value}\n'
 
     return message_report
 
