@@ -77,7 +77,7 @@ def build_detailed_message(report: ReportMessage) -> str:
 
 
 def get_config(connection_query: util.ConnectionQuery):
-    if connection_query.type_report == "director":
+    if connection_query.report_type == "director":
         src_path = "src/model/director.json"
     else:
         src_path = "src/model/sales.json"
