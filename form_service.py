@@ -36,12 +36,15 @@ class Form:
         col1, col2, col3 = st.columns(3)
         with col1:
             loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"], help=help,
+                                         placeholder=help,
                                          key=f"{id(topic)}loan_apply")
         with col2:
             approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"], help=help,
+                                       placeholder=help,
                                        key=f"{id(topic)}approved")
         with col3:
             issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"], help=help,
+                                     placeholder=help,
                                      key=f"{id(topic)}issued")
 
         return {
@@ -67,10 +70,10 @@ class Form:
 
         col1, col2 = st.columns(2)
         with col1:
-            plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help,
+            plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
                                    key=f"{id(topic)}plan")
         with col2:
-            fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help,
+            fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
                                    key=f"{id(topic)}fact")
 
         return {
@@ -97,9 +100,11 @@ class Form:
         col1, col2 = st.columns(2)
         with col1:
             divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], help=help,
+                                        placeholder=help,
                                         key=f"{id(topic)}plan")
         with col2:
             divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], help=help,
+                                      placeholder=help,
                                       key=f"{id(topic)}fact")
 
         share_value = int((divider * 100) / (divisible)) if divisible else 0
@@ -128,7 +133,7 @@ class Form:
         value_topic = st.number_input(topic_text,
                                       value=unit_value,
                                       min_value=unit_value,
-                                      help=help,
+                                      help=help, placeholder=help,
                                       key=f"{id(topic)}_number")
 
         return {
