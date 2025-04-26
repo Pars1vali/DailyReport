@@ -1,7 +1,7 @@
 import os, logging, re
 import telebot
 import util
-from service import report_service
+import report_service
 from thefuzz import process
 from util import Status
 

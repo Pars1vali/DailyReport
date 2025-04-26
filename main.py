@@ -1,7 +1,8 @@
 import streamlit as st
 import logging
 import bot, util
-from service import form_service, report_service
+import report_service
+import form_service
 from util import ConnectionQuery
 
 logging.getLogger().setLevel(logging.INFO)

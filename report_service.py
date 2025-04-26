@@ -72,9 +72,9 @@ def build_detailed_message(report: ReportMessage) -> str:
 
 def get_config(connection_query: util.ConnectionQuery):
     if connection_query.type_report == "director":
-        src_path = "../src/model/director.json"
+        src_path = "src/model/director.json"
     else:
-        src_path = "../src/model/sales.json"
+        src_path = "src/model/sales.json"
 
     with open(src_path, encoding='utf-8') as file:
         model_report = json.load(file)
