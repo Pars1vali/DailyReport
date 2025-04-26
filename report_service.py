@@ -21,18 +21,18 @@ class ReportMessage:
         self.data = data
 
 
-def create_report_message(name: str, char_status):
-    logging.info(f"Create report with name - {name}")
+def create_report_message(report_name: str, char_status):
+    logging.info(f"Create report with name - {report_name}")
     date_now = datetime.datetime.now()
 
     report_message = f"{date_now.day:0>2}.{date_now.month:0>2} ️\n"
-    report_message += f"{Status.attention} {name} {Status.attention}\n"
+    report_message += f"{Status.attention} {report_name} {Status.attention}\n"
     report_message += '\n'.join([f'{opio} - {char_status}' for opio in util.get_opio_list()])
 
     return report_message
 
 
-def get_report_message(message_id: str, name_report: str):
+def get_report_message(message_id: str, report_name: str):
     logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {message_id}")
     message_report_exists = r.exists(message_id)
 
@@ -42,7 +42,7 @@ def get_report_message(message_id: str, name_report: str):
         message_report = message_report_data.decode("utf-8")
     else:
         logging.info("Report-message in redis storage doesnt exists. Create new report-message and load to redis.")
-        message_report = create_report_message(name_report, util.Status.none)
+        message_report = create_report_message(report_name, util.Status.none)
         r.set(message_id, message_report)
 
     return message_report
