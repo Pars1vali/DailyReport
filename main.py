@@ -11,20 +11,6 @@ st.set_page_config(
     page_title="МегаФон",
 )
 
-
-def send_report(report: report_service.ReportMessage, connection_query: util.ConnectionQuery):
-    if connection_query.is_url_correct is False:
-        st.error("Неверная ссылка. Отправить отчет не удастся.")
-    elif report.opio_name is None:
-        st.warning("Необходимо выбрать название ОПиО")
-    elif report.is_photo_need and report.photo_file is None:
-        st.warning("Необходимо загрузить фото отчета без гашения")
-    else:
-        bot.send_report(report, connection_query)
-        st.success("Отчет отправлен!")
-        st.balloons()
-
-
 def main():
     connection_query = ConnectionQuery.create(st.query_params)
     config = report_service.get_config(connection_query)
@@ -40,8 +26,19 @@ def main():
         report.photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
         report.data = form_service.create_form(config)
 
-        st.form_submit_button("Отправить", use_container_width=True, on_click=send_report,
-                              args=[report, connection_query])
+        send_report_btn = st.form_submit_button("Отправить", use_container_width=True)
+
+        if send_report_btn:
+            if connection_query.is_url_correct is False:
+                st.error("Неверная ссылка. Отправить отчет не удастся.")
+            elif report.opio_name is None:
+                st.warning("Необходимо выбрать название ОПиО")
+            elif report.is_photo_need and report.photo_file is None:
+                st.warning("Необходимо загрузить фото отчета без гашения")
+            else:
+                bot.send_report(report, connection_query)
+                st.success("Отчет отправлен!")
+                st.balloons()
 
 
 if __name__ == "__main__":
