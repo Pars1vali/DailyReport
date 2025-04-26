@@ -1,4 +1,4 @@
-import logging, datetime, os, re
+import logging, datetime, os, json
 import redis
 import opio
 from opio import Status
@@ -9,6 +9,14 @@ r = redis.Redis(
     username=os.getenv("REDIS_USER"),
     password=os.getenv("REDIS_PASSWORD")
 )
+
+class ReportMessage:
+    def __init__(self, name:None, is_photo_need:None, opio_name:None, photo_file:None, data:None):
+        self.name = name
+        self.is_photo_need = is_photo_need
+        self.opio_name = opio_name
+        self.photo_file = photo_file
+        self.data = data
 
 def create_report_message(name: str, char_status):
     logging.info(f"Create report with name - {name}")
@@ -24,14 +32,13 @@ def create_report_message(name: str, char_status):
 def get_report_message(message_id: str, name_report: str):
     logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {message_id}")
     message_report_exists = r.exists(message_id)
-    logging.info(f"Report-message in redis storage {message_report_exists}.")
 
     if message_report_exists:
-        logging.info("Get message-report from redis.")
+        logging.info("Report-message in redis storage exists. Get message-report from redis.")
         message_report_data = r.get(message_id)
         message_report = message_report_data.decode("utf-8")
     else:
-        logging.info("Create new report-message and load to redis.")
+        logging.info("Report-message in redis storage doesnt exists. Create new report-message and load to redis.")
         message_report = create_report_message(name_report, opio.char_none_report_status)
         r.set(message_id, message_report)
 
@@ -43,13 +50,11 @@ def set_report_message(message_id, message_text):
     r.set(message_id, message_text)
 
 
-def build_detailed_message(opio_name: str, report_data):
+def build_detailed_message(opio_name: str, report_data: dict) -> str:
     logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
-
     message_report = f"Офис: {opio_name}\n\n"
 
     for group in report_data:
-
         for topic in group:
             message_report += topic["emoji"]
             text, value = topic["text"], topic["value"]
@@ -64,4 +69,15 @@ def build_detailed_message(opio_name: str, report_data):
                 message_report += f'\t{text} - {value}\n'
 
     return message_report
+
+def get_report_config(connection_query: opio.ConnectionQuery):
+    if connection_query.type_report == "director":
+        src_path = "src/model/director.json"
+    else:
+        src_path = "src/model/sales.json"
+
+    with open(src_path, encoding='utf-8') as file:
+        model_report = json.load(file)
+
+    return model_report
 

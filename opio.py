@@ -12,7 +12,7 @@ class Status:
 
 
 
-class QueryRequest:
+class ConnectionQuery:
 
     def __init__(self, is_url_correct: bool, chat_id=None, message_id=None, type_report=None):
         self.is_url_correct = is_url_correct
@@ -22,12 +22,12 @@ class QueryRequest:
 
 
     @staticmethod
-    def create(query_params: list):
+    def create(conn_query: list):
         try:
-            query_report = QueryRequest(is_url_correct=True)
-            query_report.type_report = query_params["type_report"]
-            query_report.chat_id = query_params["chat_id"]
-            query_report.message_id = query_params["message_id"]
+            query_report = ConnectionQuery(is_url_correct=True)
+            query_report.type_report = conn_query["type_report"]
+            query_report.chat_id = conn_query["chat_id"]
+            query_report.message_id = conn_query["message_id"]
         except Exception as e:
             logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
             query_report.is_url_correct = False
@@ -57,13 +57,3 @@ def get_opio_list():
     ])
 
 
-def get_report_config(query_request: QueryRequest):
-    if query_request.type_report == "director":
-        src_path = "src/model/director.json"
-    else:
-        src_path = "src/model/sales.json"
-
-    with open(src_path, encoding='utf-8') as file:
-        model_report = json.load(file)
-
-    return model_report
