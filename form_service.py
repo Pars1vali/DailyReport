@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def create_form(config_report):
     form_data = list()
 
@@ -55,7 +56,6 @@ class Form:
             "share": False
         }
 
-
     @staticmethod
     def create_plan_fact_topic(topic: dict) -> dict:
         topic_text = f'{topic["text"]} (план/факт)'
@@ -80,7 +80,6 @@ class Form:
             "share": False
         }
 
-
     @staticmethod
     def create_share_topic(topic: dict) -> dict:
         topic_text = f'{topic["text"]} %'
@@ -94,7 +93,8 @@ class Form:
             divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"],
                                         key=f"{id(topic)}plan")
         with col2:
-            divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], key=f"{id(topic)}fact")
+            divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"],
+                                      key=f"{id(topic)}fact")
 
         share_value = int((divider * 100) / (divisible)) if divisible else 0
         return {
@@ -109,7 +109,6 @@ class Form:
             "have_plan": False,
             "share": True
         }
-
 
     @staticmethod
     def create_number_topic(topic: dict) -> dict:

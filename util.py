@@ -1,6 +1,7 @@
 import logging, json
 from dataclasses import dataclass
 
+
 @dataclass
 class Status:
     default: str = "➖"
@@ -11,7 +12,6 @@ class Status:
     none: str = "❌"
 
 
-
 class ConnectionQuery:
 
     def __init__(self, is_url_correct: bool, chat_id=None, message_id=None, type_report=None):
@@ -19,7 +19,6 @@ class ConnectionQuery:
         self.type_report = type_report
         self.chat_id = chat_id
         self.message_id = message_id
-
 
     @staticmethod
     def create(conn_query: list):
@@ -34,6 +33,7 @@ class ConnectionQuery:
             query_report.type_report = "sales"
 
         return query_report
+
 
 def get_opio_list():
     return list([
@@ -55,5 +55,3 @@ def get_opio_list():
         "Усть-Лабинск Ленина",
         "Усть-Лабинск Ободовского"
     ])
-
-

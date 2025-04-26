@@ -10,13 +10,16 @@ r = redis.Redis(
     password=os.getenv("REDIS_PASSWORD")
 )
 
+
 class ReportMessage:
-    def __init__(self, name:None, is_photo_need:None, opio_name:None, photo_file:None, data:None):
+    def __init__(self, name: str = "Отчет о продажах", is_photo_need: bool = False, opio_name: str = None,
+                 photo_file=None, data: dict = None):
         self.name = name
         self.is_photo_need = is_photo_need
         self.opio_name = opio_name
         self.photo_file = photo_file
         self.data = data
+
 
 def create_report_message(name: str, char_status):
     logging.info(f"Create report with name - {name}")
@@ -70,6 +73,7 @@ def build_detailed_message(report: ReportMessage) -> str:
 
     return message_report
 
+
 def get_config(connection_query: util.ConnectionQuery):
     if connection_query.type_report == "director":
         src_path = "src/model/director.json"
@@ -80,4 +84,3 @@ def get_config(connection_query: util.ConnectionQuery):
         model_report = json.load(file)
 
     return model_report
-

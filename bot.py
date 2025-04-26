@@ -26,7 +26,8 @@ def set_status(connection_query: util.ConnectionQuery, opio_name: str, char_stat
             report_message_old)
 
         report_service.set_report_message(connection_query.message_id, report_message_edit)
-        bot.edit_message_text(chat_id=connection_query.chat_id, message_id=connection_query.message_id, text=report_message_edit)
+        bot.edit_message_text(chat_id=connection_query.chat_id, message_id=connection_query.message_id,
+                              text=report_message_edit)
         return is_status_set
     except Exception as e:
         logging.error(f"Edited message the same with new message text. {e}")

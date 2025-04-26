@@ -24,6 +24,7 @@ def send_report(report: report_service.ReportMessage, connection_query: util.Con
         st.success("Отчет отправлен!")
         st.balloons()
 
+
 def main():
     connection_query = ConnectionQuery.create(st.query_params)
     config = report_service.get_config(connection_query)
