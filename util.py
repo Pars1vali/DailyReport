@@ -1,4 +1,4 @@
-import logging, json
+import logging
 from dataclasses import dataclass
 
 
