@@ -114,7 +114,6 @@ class Form:
     def create_number_topic(topic: dict) -> dict:
         topic_type = topic.get("type", "number")
         unit_name = "руб." if topic_type == "money" else "шт."
-        unit_step = 1000 if topic_type == "money" else 1
         unit_value = topic.get("unit", 0)
         topic_text = f'{topic["text"]}, {unit_name}'
         emoji = topic.get("emoji", "🟢")
@@ -122,7 +121,6 @@ class Form:
         value_topic = st.number_input(topic_text,
                                       value=unit_value,
                                       min_value=unit_value,
-                                      step=unit_step,
                                       key=f"{id(topic)}_number")
 
         return {
