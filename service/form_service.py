@@ -8,13 +8,13 @@ def create_form(config_report):
 
         for topic in section:
             if topic["is_credit"] is True:
-                topic_data = Form.credit(topic)
+                topic_data = Form.create_credit_topic(topic)
             elif topic["have_plan"] is True:
-                topic_data = Form.plan_fact(topic)
+                topic_data = Form.create_plan_fact_topic(topic)
             elif topic["share"] is True:
-                topic_data = Form.share(topic)
+                topic_data = Form.create_share_topic(topic)
             else:
-                topic_data = Form.number(topic)
+                topic_data = Form.create_number_topic(topic)
 
             section_data.append(topic_data)
 
@@ -26,7 +26,7 @@ def create_form(config_report):
 class Form:
 
     @staticmethod
-    def credit(topic: dict) -> dict:
+    def create_credit_topic(topic: dict) -> dict:
         topic_text = f'{topic["text"]} (заявки/одобрено/выдано)'
         emoji = topic.get("emoji", "🟢")
         st.markdown(f"**{topic_text}**")
@@ -57,7 +57,7 @@ class Form:
 
 
     @staticmethod
-    def plan_fact(topic: dict) -> dict:
+    def create_plan_fact_topic(topic: dict) -> dict:
         topic_text = f'{topic["text"]} (план/факт)'
         emoji = topic.get("emoji", "🟢")
         st.markdown(f"**{topic_text}**")
@@ -82,7 +82,7 @@ class Form:
 
 
     @staticmethod
-    def share(topic: dict) -> dict:
+    def create_share_topic(topic: dict) -> dict:
         topic_text = f'{topic["text"]} %'
         emoji = topic.get("emoji", "🟢")
         divisible_text = topic.get("divisible", "Число 1")
@@ -112,7 +112,7 @@ class Form:
 
 
     @staticmethod
-    def number(topic: dict) -> dict:
+    def create_number_topic(topic: dict) -> dict:
         topic_type = topic.get("type", "number")
         unit_name = "руб." if topic_type == "money" else "шт."
         unit_value = topic.get("unit", 0)

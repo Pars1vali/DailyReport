@@ -1,7 +1,7 @@
 import logging, datetime, os, json
 import redis
-import opio
-from opio import Status
+import util
+from util import Status
 
 r = redis.Redis(
     host=os.getenv("REDIS_IP"),
@@ -24,7 +24,7 @@ def create_report_message(name: str, char_status):
 
     report_message = f"{date_now.day:0>2}.{date_now.month:0>2} ️\n"
     report_message += f"{Status.attention} {name} {Status.attention}\n"
-    report_message += '\n'.join([f'{opio} - {char_status}' for opio in opio.get_opio_list()])
+    report_message += '\n'.join([f'{opio} - {char_status}' for opio in util.get_opio_list()])
 
     return report_message
 
@@ -39,7 +39,7 @@ def get_report_message(message_id: str, name_report: str):
         message_report = message_report_data.decode("utf-8")
     else:
         logging.info("Report-message in redis storage doesnt exists. Create new report-message and load to redis.")
-        message_report = create_report_message(name_report, opio.char_none_report_status)
+        message_report = create_report_message(name_report, util.Status.none)
         r.set(message_id, message_report)
 
     return message_report
@@ -50,11 +50,11 @@ def set_report_message(message_id, message_text):
     r.set(message_id, message_text)
 
 
-def build_detailed_message(opio_name: str, report_data: dict) -> str:
-    logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
-    message_report = f"Офис: {opio_name}\n\n"
+def build_detailed_message(report: ReportMessage) -> str:
+    logging.info(f"Create message with sales for report in tg-group. From opio-{report.opio_name}")
+    message_report = f"Офис: {report.opio_name}\n\n"
 
-    for group in report_data:
+    for group in report.data:
         for topic in group:
             message_report += topic["emoji"]
             text, value = topic["text"], topic["value"]
@@ -70,11 +70,11 @@ def build_detailed_message(opio_name: str, report_data: dict) -> str:
 
     return message_report
 
-def get_report_config(connection_query: opio.ConnectionQuery):
+def get_config(connection_query: util.ConnectionQuery):
     if connection_query.type_report == "director":
-        src_path = "src/model/director.json"
+        src_path = "../src/model/director.json"
     else:
-        src_path = "src/model/sales.json"
+        src_path = "../src/model/sales.json"
 
     with open(src_path, encoding='utf-8') as file:
         model_report = json.load(file)

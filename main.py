@@ -1,7 +1,8 @@
 import streamlit as st
 import logging
-import bot, opio, form, report_service
-from opio import ConnectionQuery
+import bot, util
+from service import form_service, report_service
+from util import ConnectionQuery
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -10,7 +11,7 @@ st.set_page_config(
 )
 
 
-def send_report(report: report_service.ReportMessage, connection_query: opio.ConnectionQuery):
+def send_report(report: report_service.ReportMessage, connection_query: util.ConnectionQuery):
     if connection_query.is_url_correct is False:
         st.error("Неверная ссылка. Отправить отчет не удастся.")
     elif report.opio_name is None:
@@ -24,18 +25,18 @@ def send_report(report: report_service.ReportMessage, connection_query: opio.Con
 
 def main():
     connection_query = ConnectionQuery.create(st.query_params)
-    report_config = report_service.get_report_config(connection_query)
+    config = report_service.get_config(connection_query)
 
     report = report_service.ReportMessage()
-    report.name = report_config.get("name", "Отчет")
-    report.is_photo_need = report_config.get("photo_need", False)
+    report.name = config.get("name", "Отчет")
+    report.is_photo_need = config.get("photo_need", False)
 
     with st.form("Отчет"):
         st.subheader(report.name)
 
-        report.opio_name = st.selectbox("Название вашего ОПиО", opio.get_opio_list(), index=None, placeholder="ОПиО")
+        report.opio_name = st.selectbox("Название вашего ОПиО", util.get_opio_list(), index=None, placeholder="ОПиО")
         report.photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
-        report.data = form.create_form(report_config)
+        report.data = form_service.create_form(config)
 
         st.form_submit_button("Отправить", use_container_width=True, on_click=send_report,
                               args=[report, connection_query])
