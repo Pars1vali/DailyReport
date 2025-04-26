@@ -3,11 +3,11 @@ from dataclasses import dataclass
 
 @dataclass
 class Status:
-    default: str = "➖",
-    complete: str = "✅",
-    stop: str = "⛔",
-    attention: str = "❗",
-    time: str = "⌛",
+    default: str = "➖"
+    complete: str = "✅"
+    stop: str = "⛔"
+    attention: str = "❗"
+    time: str = "⌛"
     none: str = "❌"
 
 
