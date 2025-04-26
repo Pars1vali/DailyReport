@@ -55,7 +55,7 @@ def set_report_message(message_id, message_text):
 
 def build_detailed_message(report: ReportMessage) -> str:
     logging.info(f"Create message with sales for report in tg-group. From opio-{report.opio_name}")
-    message_report = f"Офис: {report.opio_name}\n"
+    message_report = f"{report.opio_name}\n"
 
     for group in report.data:
         message_report += "\n"
