@@ -119,7 +119,7 @@ class Form:
         topic_text = f'{topic["text"]}, {unit_name}'
         emoji = topic.get("emoji", "🟢")
 
-        value_topic = st.number_input(text=topic_text,
+        value_topic = st.number_input(topic_text,
                                       value=unit_value,
                                       min_value=unit_value,
                                       key=f"{id(topic)}_number")
