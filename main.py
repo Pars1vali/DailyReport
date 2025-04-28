@@ -112,9 +112,6 @@ def create_number_topic(topic: dict) -> dict:
     help = topic.get("help", None)
 
     value_topic = st.number_input(topic_text,
-                                  value=unit_value,
-                                  min_value=unit_value,
-                                  help=help,
                                   key=f"{id(topic)}_number")
 
     st.write(value_topic)
