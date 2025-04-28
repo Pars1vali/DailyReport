@@ -2,7 +2,7 @@ import streamlit as st
 import logging
 import bot, util
 import report_service
-from form_service import Form
+import form_service
 from util import ConnectionQuery
 
 logging.getLogger().setLevel(logging.INFO)
@@ -20,13 +20,13 @@ def create_form(config_report):
 
         for topic in section:
             if topic["is_credit"] is True:
-                topic_data = Form.create_credit_topic(topic)
+                topic_data = form_service.create_credit_topic(topic)
             elif topic["have_plan"] is True:
-                topic_data = Form.create_plan_fact_topic(topic)
+                topic_data = form_service.create_plan_fact_topic(topic)
             elif topic["share"] is True:
-                topic_data = Form.create_share_topic(topic)
+                topic_data = form_service.create_share_topic(topic)
             else:
-                topic_data = Form.create_number_topic(topic)
+                topic_data = form_service.create_number_topic(topic)
 
             section_data.append(topic_data)
 
