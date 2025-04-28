@@ -2,7 +2,7 @@ import streamlit as st
 import logging
 import bot, util
 import report_service
-import form_service
+from form_service import Form
 from util import ConnectionQuery
 
 logging.getLogger().setLevel(logging.INFO)
@@ -10,6 +10,30 @@ logging.getLogger().setLevel(logging.INFO)
 st.set_page_config(
     page_title="МегаФон",
 )
+
+
+def create_form(config_report):
+    form_data = list()
+
+    for section in config_report["schema"]:
+        section_data = list()
+
+        for topic in section:
+            if topic["is_credit"] is True:
+                topic_data = Form.create_credit_topic(topic)
+            elif topic["have_plan"] is True:
+                topic_data = Form.create_plan_fact_topic(topic)
+            elif topic["share"] is True:
+                topic_data = Form.create_share_topic(topic)
+            else:
+                topic_data = Form.create_number_topic(topic)
+
+            section_data.append(topic_data)
+
+        form_data.append(section_data)
+
+    return form_data
+
 
 def main():
     connection_query = ConnectionQuery.create(st.query_params)
@@ -24,7 +48,7 @@ def main():
 
         report.opio_name = st.selectbox("Название вашего ОПиО", util.get_opio_list(), index=None, placeholder="ОПиО")
         report.photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
-        report.data = form_service.create_form(config)
+        report.data = create_form(config)
 
         send_report_btn = st.form_submit_button("Отправить", use_container_width=True)
 
