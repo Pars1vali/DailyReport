@@ -163,7 +163,27 @@ def main():
 
         report.opio_name = st.selectbox("Название вашего ОПиО", util.get_opio_list(), index=None, placeholder="ОПиО")
         report.photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
-        report.data = create_form(config)
+
+        form_data = list()
+        for section in config["schema"]:
+            section_data = list()
+
+            for topic in section:
+                if topic["is_credit"] is True:
+                    topic_data = create_credit_topic(topic)
+                elif topic["have_plan"] is True:
+                    topic_data = create_plan_fact_topic(topic)
+                elif topic["share"] is True:
+                    topic_data = create_share_topic(topic)
+                else:
+                    topic_data = create_number_topic(topic)
+
+                section_data.append(topic_data)
+                st.write(section_data)
+
+            form_data.append(section_data)
+
+        report.data = form_data
 
         send_report_btn = st.form_submit_button("Отправить", use_container_width=True)
 
