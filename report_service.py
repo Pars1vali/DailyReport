@@ -58,8 +58,6 @@ def build_detailed_message(report: ReportMessage) -> str:
     message_report = f"{report.opio_name}\n"
 
     for group in report.data:
-        message_report += "\n"
-
         for topic in group:
             message_report += topic["emoji"]
             text, value = topic["text"], topic["value"]
