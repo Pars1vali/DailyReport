@@ -52,10 +52,10 @@ def create_plan_fact_topic(topic: dict) -> dict:
 
     col1, col2 = st.columns(2)
     with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help,
+        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"],
                                key=f"{id(topic)}plan")
     with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help,
+        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"],
                                key=f"{id(topic)}fact")
 
     return {
@@ -116,6 +116,8 @@ def create_number_topic(topic: dict) -> dict:
                                   min_value=unit_value,
                                   help=help,
                                   key=f"{id(topic)}_number")
+
+    st.write(value_topic)
 
     return {
         "text": topic_text,
