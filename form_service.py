@@ -1,6 +1,27 @@
 import streamlit as st
 
 
+def create_form_service(config):
+    form_data = list()
+    for section in config["schema"]:
+        section_data = list()
+
+        for topic in section:
+            if topic["is_credit"] is True:
+                topic_data = create_credit_topic(topic)
+            elif topic["have_plan"] is True:
+                topic_data = create_plan_fact_topic(topic)
+            elif topic["share"] is True:
+                topic_data = create_share_topic(topic)
+            else:
+                topic_data = create_number_topic(topic)
+
+            section_data.append(topic_data)
+        form_data.append(section_data)
+
+    return form_data
+
+
 def create_credit_topic(topic: dict) -> dict:
     topic_text = f'{topic["text"]} (заявки/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
