@@ -30,6 +30,7 @@ def main():
         send_report_btn = st.form_submit_button("Отправить", use_container_width=True)
 
         if send_report_btn:
+            st.write(report.data)
             if connection_query.is_url_correct is False:
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif report.opio_name is None:
