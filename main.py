@@ -21,15 +21,12 @@ def create_credit_topic(topic: dict) -> dict:
     col1, col2, col3 = st.columns(3)
     with col1:
         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"], help=help,
-                                     placeholder=help,
                                      key=f"{id(topic)}loan_apply")
     with col2:
         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"], help=help,
-                                   placeholder=help,
                                    key=f"{id(topic)}approved")
     with col3:
         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"], help=help,
-                                 placeholder=help,
                                  key=f"{id(topic)}issued")
 
     return {
@@ -55,10 +52,10 @@ def create_plan_fact_topic(topic: dict) -> dict:
 
     col1, col2 = st.columns(2)
     with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
+        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help,
                                key=f"{id(topic)}plan")
     with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
+        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help,
                                key=f"{id(topic)}fact")
 
     return {
@@ -89,7 +86,6 @@ def create_share_topic(topic: dict) -> dict:
                                     key=f"{id(topic)}plan")
     with col2:
         divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], help=help,
-                                  placeholder=help,
                                   key=f"{id(topic)}fact")
 
     share_value = int((divider * 100) / (divisible)) if divisible else 0
@@ -118,7 +114,7 @@ def create_number_topic(topic: dict) -> dict:
     value_topic = st.number_input(topic_text,
                                   value=unit_value,
                                   min_value=unit_value,
-                                  help=help, placeholder=help,
+                                  help=help,
                                   key=f"{id(topic)}_number")
 
     return {
@@ -129,7 +125,6 @@ def create_number_topic(topic: dict) -> dict:
         "have_plan": False,
         "share": False
     }
-
 
 
 def create_form(config_report):
