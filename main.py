@@ -181,8 +181,6 @@ def main():
                     topic_data = create_number_topic(topic)
 
                 section_data.append(topic_data)
-                st.write(section_data)
-
             form_data.append(section_data)
 
         report.data = form_data
