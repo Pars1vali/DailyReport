@@ -31,7 +31,7 @@ def create_form(config_report):
             section_data.append(topic_data)
 
         form_data.append(section_data)
-
+    st.write(form_data)
     return form_data
 
 
