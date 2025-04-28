@@ -29,9 +29,9 @@ def create_form(config_report):
                 topic_data = form_service.create_number_topic(topic)
 
             section_data.append(topic_data)
+            st.write(section_data)
 
         form_data.append(section_data)
-    st.write(form_data)
     return form_data
 
 
