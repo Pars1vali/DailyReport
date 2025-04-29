@@ -284,7 +284,7 @@ def main():
         opio_name = st.selectbox("Название вашего ОПиО", get_opio_list(), index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
-        for index_group, group in enumerate(model_report["topics"]):
+        for index_group, group in enumerate(model_report["schema"]):
             group_unit = list()
             report_data.append(group_unit)
             for index_topic, topic in enumerate(group):
