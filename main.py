@@ -252,19 +252,19 @@ def number_topic(topic):
 
 def get_query_info():
     try:
-        query_report = util.ConnectionQuery(url_correct=True)
-        query_report.type_report = st.query_params["type_report"]
+        query_report = util.ConnectionQuery(is_url_correct=True)
+        query_report.report_type = st.query_params["report_type"]
         query_report.chat_id = st.query_params["chat_id"]
         query_report.message_id = st.query_params["message_id"]
     except Exception as e:
-        query_report.url_correct = False
-        query_report.type_report = "sales"
+        query_report.is_url_correct = False
+        query_report.report_type = "sales"
         logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
 
     return query_report
 
 def get_model_report(query_report: util.ConnectionQuery):
-    if query_report.type_report == "director":
+    if query_report.report_type == "director":
         src_path = "src/model/director.json"
     else:
         src_path = "src/model/sales.json"
