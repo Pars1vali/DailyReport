@@ -176,6 +176,8 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report, connection_query)
+                st.success("Отчет отправлен!")
+                st.balloons()
 
 
 if __name__ == "__main__":

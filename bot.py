@@ -50,5 +50,3 @@ def send_report(report: report_service.ReportMessage, connection_query: util.Con
         logging.info(f"Send report. For tg-groupe{connection_query.chat_id}.")
         bot.send_message(connection_query.chat_id, text=message)
 
-    st.success("Отчет отправлен!")
-    st.balloons()
