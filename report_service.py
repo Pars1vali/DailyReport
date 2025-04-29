@@ -59,7 +59,7 @@ def build_detailed_message(report_data, opio_name) -> str:
 
     for group in report_data:
         for topic in group:
-            message_report += topic["emoji"]
+            message_report += topic.get("emoji", "🟢")
             text, value = topic["text"], topic["value"]
 
             if topic["have_plan"] is True:
