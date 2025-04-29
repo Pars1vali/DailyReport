@@ -10,12 +10,12 @@ logging.getLogger().setLevel(logging.INFO)
 st.set_page_config(
     page_title="МегаФон",
 )
+report = report_service.ReportMessage()
 
 def main():
     connection_query = ConnectionQuery.create(st.query_params)
     config = report_service.get_config(connection_query)
 
-    report = report_service.ReportMessage()
     report.name = config.get("name", "Отчет")
     report.is_photo_need = config.get("photo_need", False)
 
@@ -26,7 +26,6 @@ def main():
         report.photo_file = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
         report.data = form_service.create_form_service(config)
-        value = st.text_input("Ntrcnn")
         send_report_btn = st.form_submit_button("Отправить", use_container_width=True)
 
         if send_report_btn:
@@ -38,7 +37,6 @@ def main():
             elif report.is_photo_need and report.photo_file is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                st.write(value)
                 bot.send_report(report, connection_query)
 
 
