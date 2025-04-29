@@ -284,6 +284,7 @@ def main():
         opio_name = st.selectbox("Название вашего ОПиО", get_opio_list(), index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
 
+        report_data = list()
         for index_group, group in enumerate(model_report["schema"]):
             group_unit = list()
             report_data.append(group_unit)
@@ -295,7 +296,6 @@ def main():
                 else:
                     group_unit.append(number_topic(topic))
 
-
         send = st.form_submit_button("Отправить", use_container_width=True)
 
         if send:
@@ -306,6 +306,7 @@ def main():
             elif photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
+                st.write(report_data)
                 bot.send_report(report_data, False, photo_cheque, query_report, opio_name)
                 st.success("Отчет отправлен!")
                 st.balloons()
