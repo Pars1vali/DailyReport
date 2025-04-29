@@ -299,7 +299,7 @@ def main():
         send = st.form_submit_button("Отправить", use_container_width=True)
 
         if send:
-            if query_report.url_correct is False:
+            if query_report.is_url_correct is False:
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif opio_name is None:
                 st.warning("Необходимо выбрать название ОПиО")
