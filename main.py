@@ -47,6 +47,7 @@ def create_credit_topic(topic: dict) -> dict:
         "share": False
     }
 
+
 def create_plan_fact_topic(topic: dict) -> dict:
     topic_text = f'{topic["text"]} (план/факт)'
     emoji = topic.get("emoji", "🟢")
@@ -73,6 +74,7 @@ def create_plan_fact_topic(topic: dict) -> dict:
         "have_plan": True,
         "share": False
     }
+
 
 def create_share_topic(topic: dict) -> dict:
     topic_text = f'{topic["text"]} %'
@@ -106,6 +108,7 @@ def create_share_topic(topic: dict) -> dict:
         "share": True
     }
 
+
 def create_number_topic(topic: dict) -> dict:
     topic_type = topic.get("type", "number")
     unit_name = "руб." if topic_type == "money" else "шт."
@@ -134,11 +137,11 @@ def main():
     connection_query = ConnectionQuery.create(st.query_params)
     config = report_service.get_config(connection_query)
 
-    report = report_service.ReportMessage()
-    report.name = config.get("name", "Отчет")
-    report.is_photo_need = config.get("photo_need", False)
-
     with st.form("Отчет"):
+
+        report = report_service.ReportMessage()
+        report.name = config.get("name", "Отчет")
+        report.is_photo_need = config.get("photo_need", False)
         st.subheader(report.name)
 
         report.opio_name = st.selectbox("Название вашего ОПиО", util.get_opio_list(), index=None, placeholder="ОПиО")
