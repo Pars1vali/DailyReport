@@ -53,11 +53,11 @@ def set_report_message(message_id, message_text):
     r.set(message_id, message_text)
 
 
-def build_detailed_message(report: ReportMessage) -> str:
-    logging.info(f"Create message with sales for report in tg-group. From opio-{report.opio_name}")
-    message_report = f"{report.opio_name}\n"
+def build_detailed_message(report_data, opio_name) -> str:
+    logging.info(f"Create message with sales for report in tg-group. From opio-{opio_name}")
+    message_report = f"{opio_name}\n"
 
-    for group in report.data:
+    for group in report_data:
         for topic in group:
             message_report += topic["emoji"]
             text, value = topic["text"], topic["value"]
