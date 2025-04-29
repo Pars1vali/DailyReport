@@ -48,32 +48,33 @@
 #     }
 #
 #
-# def create_plan_fact_topic(topic: dict) -> dict:
-#     topic_text = f'{topic["text"]} (план/факт)'
-#     emoji = topic.get("emoji", "🟢")
-#     help = topic.get("help", None)
-#
-#     st.markdown(f"**{topic_text}**")
-#
-#     col1, col2 = st.columns(2)
-#     with col1:
-#         plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
-#                                key=f"{id(topic)}plan")
-#     with col2:
-#         fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
-#                                key=f"{id(topic)}fact")
-#
-#     return {
-#         "text": topic_text,
-#         "emoji": emoji,
-#         "value": {
-#             "plan": plan,
-#             "fact": fact
-#         },
-#         "is_credit": False,
-#         "have_plan": True,
-#         "share": False
-#     }
+
+def create_plan_fact_topic(topic: dict) -> dict:
+    topic_text = f'{topic["text"]} (план/факт)'
+    emoji = topic.get("emoji", "🟢")
+    help = topic.get("help", None)
+
+    st.markdown(f"**{topic_text}**")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
+                               key=f"{id(topic)}plan")
+    with col2:
+        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
+                               key=f"{id(topic)}fact")
+
+    return {
+        "text": topic_text,
+        "emoji": emoji,
+        "value": {
+            "plan": plan,
+            "fact": fact
+        },
+        "is_credit": False,
+        "have_plan": True,
+        "share": False
+    }
 #
 #
 # def create_share_topic(topic: dict) -> dict:
@@ -220,25 +221,25 @@ def credit_topic(topic, index_topic):
         "have_plan": False
     }
 
-def plan_fact_topic(topic, index_group):
-    text_topic = topic["text"]
-    st.markdown(f"**{text_topic}**")
-
-    col1, col2 = st.columns(2)
-    with col1:
-        plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
-    with col2:
-        fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
-
-    return {
-        "text": text_topic,
-        "value": {
-            "plan": plan,
-            "fact": fact
-        },
-        "is_credit": False,
-        "have_plan": True
-    }
+# def plan_fact_topic(topic, index_group):
+#     text_topic = topic["text"]
+#     st.markdown(f"**{text_topic}**")
+#
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}plan")
+#     with col2:
+#         fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], key=f"{index_group}fact")
+#
+#     return {
+#         "text": text_topic,
+#         "value": {
+#             "plan": plan,
+#             "fact": fact
+#         },
+#         "is_credit": False,
+#         "have_plan": True
+#     }
 
 def number_topic(topic):
     value_topic = st.number_input(topic["text"], value=topic["unit"],
@@ -292,7 +293,7 @@ def main():
                 if topic["is_credit"] is True:
                     group_unit.append(credit_topic(topic, index_topic))
                 elif topic["have_plan"] is True:
-                    group_unit.append(plan_fact_topic(topic, index_group))
+                    group_unit.append(create_plan_fact_topic(topic))
                 else:
                     group_unit.append(number_topic(topic))
 
