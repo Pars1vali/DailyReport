@@ -110,28 +110,28 @@ def create_plan_fact_topic(topic: dict) -> dict:
 #     }
 #
 #
-# def create_number_topic(topic: dict) -> dict:
-#     topic_type = topic.get("type", "number")
-#     unit_name = "руб." if topic_type == "money" else "шт."
-#     unit_value = topic.get("unit", 0)
-#     topic_text = f'{topic["text"]}, {unit_name}'
-#     emoji = topic.get("emoji", "🟢")
-#     help = topic.get("help", None)
-#
-#     value_topic = st.number_input(topic_text,
-#                                   value=unit_value,
-#                                   min_value=unit_value,
-#                                   help=help, placeholder=help,
-#                                   key=f"{id(topic)}_number")
-#
-#     return {
-#         "text": topic_text,
-#         "emoji": emoji,
-#         "value": value_topic,
-#         "is_credit": False,
-#         "have_plan": False,
-#         "share": False
-#     }
+def create_number_topic(topic: dict) -> dict:
+    topic_type = topic.get("type", "number")
+    unit_name = "руб." if topic_type == "money" else "шт."
+    unit_value = topic.get("unit", 0)
+    topic_text = f'{topic["text"]}, {unit_name}'
+    emoji = topic.get("emoji", "🟢")
+    help = topic.get("help", None)
+
+    value_topic = st.number_input(topic_text,
+                                  value=unit_value,
+                                  min_value=unit_value,
+                                  help=help, placeholder=help,
+                                  key=f"{id(topic)}_number")
+
+    return {
+        "text": topic_text,
+        "emoji": emoji,
+        "value": value_topic,
+        "is_credit": False,
+        "have_plan": False,
+        "share": False
+    }
 #
 #
 # def main():
@@ -295,7 +295,7 @@ def main():
                 elif topic["have_plan"] is True:
                     group_unit.append(create_plan_fact_topic(topic))
                 else:
-                    group_unit.append(number_topic(topic))
+                    group_unit.append(create_number_topic(topic))
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
