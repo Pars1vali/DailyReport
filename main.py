@@ -306,7 +306,7 @@ def main():
             elif photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                bot.send_report(report_data, photo_cheque, query_report, opio_name)
+                bot.send_report(report_data, False, photo_cheque, query_report, opio_name)
                 st.success("Отчет отправлен!")
                 st.balloons()
 
