@@ -40,7 +40,7 @@ def send_report(report: report_service.ReportMessage, connection_query: util.Con
 
     if is_status_set is False:
         logging.error(f"Status for {report.opio_name} doesn't set. Report for this opio already have.")
-        st.error("Отчет для этого ОПиО уже отправлен.")
+        # st.error("Отчет для этого ОПиО уже отправлен.")
         return
 
     if report.is_photo_need:
