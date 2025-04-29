@@ -295,7 +295,7 @@ def main():
                 elif topic["have_plan"] is True:
                     group_unit.append(create_plan_fact_topic(topic))
                 else:
-                    group_unit.append(create_number_topic(topic))
+                    group_unit.append(number_topic(topic))
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
