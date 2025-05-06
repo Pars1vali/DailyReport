@@ -199,7 +199,7 @@ def create_number_topic(topic: dict) -> dict:
 import json
 import streamlit as st
 import logging
-import bot, util
+import util, bot
 import report_service
 from util import get_opio_list, Status
 
@@ -229,7 +229,8 @@ def credit_topic(topic, index_topic):
             "issued": issued
         },
         "is_credit": True,
-        "have_plan": False
+        "have_plan": False,
+        "share": False
     }
 
 # def plan_fact_topic(topic, index_group):
@@ -259,7 +260,8 @@ def number_topic(topic):
         "text": topic["text"],
         "value": value_topic,
         "is_credit": False,
-        "have_plan": False
+        "have_plan": False,
+        "share": False
     }
 
 def get_query_info():
