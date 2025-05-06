@@ -34,7 +34,6 @@ def create_plan_fact_topic(topic: dict) -> dict:
         "share": False
     }
 
-
 def create_share_topic(topic: dict) -> dict:
     topic_text = f'{topic["text"]} %'
     emoji = topic.get("emoji", "🟢")
@@ -67,7 +66,6 @@ def create_share_topic(topic: dict) -> dict:
         "share": True
     }
 
-
 def credit_topic(topic, index_topic):
     text_topic = topic["text"]
     emoji = topic.get("emoji", "🟢")
@@ -97,7 +95,6 @@ def credit_topic(topic, index_topic):
         "have_plan": False,
         "share": False
     }
-
 
 def number_topic(topic):
     value_topic = st.number_input(topic["text"], value=topic["unit"],
@@ -170,7 +167,7 @@ def main():
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif opio_name is None:
                 st.warning("Необходимо выбрать название ОПиО")
-            elif photo_cheque is None:
+            elif photo_need and photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
