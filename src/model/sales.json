@@ -56,7 +56,7 @@
     [
       {
         "emoji": "3️⃣",
-        "type": "number",
+        "type": "money",
         "text": "Фин услуги",
         "unit": 0,
         "is_credit": false,
@@ -65,7 +65,7 @@
       },
       {
         "emoji": "➖",
-        "type": "number",
+        "type": "money",
         "text": "Аксы",
         "unit": 0,
         "is_credit": false,
