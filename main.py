@@ -125,8 +125,8 @@ def get_query_info():
     return query_report
 
 def get_model_report(query_report: util.ConnectionQuery):
-    if query_report.report_type == "director":
-        src_path = "src/model/director.json"
+    if query_report.report_type == "dopio":
+        src_path = "src/model/dopio.json"
     else:
         src_path = "src/model/sales.json"
 

@@ -76,7 +76,7 @@ def build_detailed_message(report_data, opio_name) -> str:
 
 def get_config(connection_query: util.ConnectionQuery):
     if connection_query.report_type == "director":
-        src_path = "src/model/director.json"
+        src_path = "src/model/dopio.json"
     else:
         src_path = "src/model/sales.json"
 
