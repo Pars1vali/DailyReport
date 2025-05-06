@@ -34,13 +34,14 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
         is_status_set = False
         return is_status_set
 
+
 def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_name) -> bool:
     message = report_service.build_detailed_message(report_data, opio_name)
     is_status_set = set_status(query_report, opio_name, Status.complete)
 
     if is_status_set is False:
         logging.error(f"Status for {opio_name} doesn't set. Report for this opio already have.")
-        # st.error("Отчет для этого ОПиО уже отправлен.")
+        st.error("Отчет для этого ОПиО уже отправлен.")
         return
 
     if is_photo_need:
@@ -50,21 +51,3 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
         logging.info(f"Send report. For tg-groupe{query_report.chat_id}.")
         bot.send_message(query_report.chat_id, text=message)
 
-
-
-# def send_report(report: report_service.ReportMessage, connection_query: util.ConnectionQuery) -> bool:
-#     message = report_service.build_detailed_message(report)
-#     is_status_set = set_status(connection_query, report.opio_name, Status.complete)
-#
-#     if is_status_set is False:
-#         logging.error(f"Status for {report.opio_name} doesn't set. Report for this opio already have.")
-#         # st.error("Отчет для этого ОПиО уже отправлен.")
-#         return
-#
-#     if report.is_photo_need:
-#         logging.info(f"Send report with check photo. For tg-groupe{connection_query.chat_id}.")
-#         bot.send_photo(connection_query.chat_id, photo=report.photo_file, caption=message)
-#     else:
-#         logging.info(f"Send report. For tg-groupe{connection_query.chat_id}.")
-#         bot.send_message(connection_query.chat_id, text=message)
-#

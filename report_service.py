@@ -10,17 +10,6 @@ r = redis.Redis(
     password=os.getenv("REDIS_PASSWORD")
 )
 
-
-class ReportMessage:
-    def __init__(self, name: str = "Отчет о продажах", is_photo_need: bool = False, opio_name: str = None,
-                 photo_file=None, data: dict = None):
-        self.name = name
-        self.is_photo_need = is_photo_need
-        self.opio_name = opio_name
-        self.photo_file = photo_file
-        self.data = data
-
-
 def create_report_message(report_name: str, char_status):
     logging.info(f"Create report with name - {report_name}")
     date_now = datetime.datetime.now()
