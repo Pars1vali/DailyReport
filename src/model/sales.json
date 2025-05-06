@@ -16,7 +16,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "Мегасемья",
+        "text": "YOTA Максимум 1150 руб.",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -25,7 +25,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "ТП VIP",
+        "text": "Абонементы Мегафон+Yota",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -36,27 +36,7 @@
       {
         "emoji": "2️⃣",
         "type": "number",
-        "text": "Абонементы Мегафон+Yota",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Абонемент YOTA Максимум",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "3️⃣",
-        "type": "number",
-        "text": "РК HONOR(от x8c)",
+        "text": "РК Samsung",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -71,11 +51,13 @@
         "is_credit": false,
         "have_plan": false,
         "share": false
-      },
+      }
+    ],
+    [
       {
-        "emoji": "➖",
+        "emoji": "3️⃣",
         "type": "number",
-        "text": "Apple",
+        "text": "Фин услуги",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -84,8 +66,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "Первая цена",
-        "help": "Realme Note 50/60/60x, Xiaomi Redmi A05/A03/A03x",
+        "text": "Аксы",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -115,59 +96,8 @@
     [
       {
         "emoji": "5️⃣",
-        "type": "money",
-        "text": "Аксесуары",
-        "unit": 0.0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Акция 1+1",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "6️⃣",
-        "type": "money",
-        "text": "ФУ",
-        "unit": 0.0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Плотер",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "7️⃣",
         "type": "number",
         "text": "Адаптер",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "8️⃣",
-        "type": "number",
-        "text": "NPS 9/10 факт за день",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
