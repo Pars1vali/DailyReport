@@ -49,6 +49,7 @@
 #
 #
 
+
 def create_plan_fact_topic(topic: dict) -> dict:
     topic_text = f'{topic["text"]} (план/факт)'
     emoji = topic.get("emoji", "🟢")
@@ -75,42 +76,52 @@ def create_plan_fact_topic(topic: dict) -> dict:
         "have_plan": True,
         "share": False
     }
-#
-#
-# def create_share_topic(topic: dict) -> dict:
-#     topic_text = f'{topic["text"]} %'
-#     emoji = topic.get("emoji", "🟢")
-#     help = topic.get("help", None)
-#     divisible_text = topic.get("divisible", "Число 1")
-#     divider_text = topic.get("divider", "Число 2")
-#
-#     st.markdown(f"**{topic_text}**")
-#     col1, col2 = st.columns(2)
-#     with col1:
-#         divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], help=help,
-#                                     placeholder=help,
-#                                     key=f"{id(topic)}plan")
-#     with col2:
-#         divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], help=help,
-#                                   placeholder=help,
-#                                   key=f"{id(topic)}fact")
-#
-#     share_value = int((divider * 100) / (divisible)) if divisible else 0
-#     return {
-#         "text": topic_text,
-#         "emoji": emoji,
-#         "value": {
-#             "divisible": divisible,
-#             "divider": divider,
-#             "share": share_value
-#         },
-#         "is_credit": False,
-#         "have_plan": False,
-#         "share": True
-#     }
-#
-#
+
+
+def create_share_topic(topic: dict) -> dict:
+    topic_text = f'{topic["text"]} %'
+    emoji = topic.get("emoji", "🟢")
+    help = topic.get("help", None)
+    divisible_text = topic.get("divisible", "Число 1")
+    divider_text = topic.get("divider", "Число 2")
+
+    st.markdown(f"**{topic_text}**")
+    col1, col2 = st.columns(2)
+    with col1:
+        divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], help=help,
+                                    placeholder=help,
+                                    key=f"{id(topic)}plan")
+    with col2:
+        divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], help=help,
+                                  placeholder=help,
+                                  key=f"{id(topic)}fact")
+
+    share_value = int((divider * 100) / (divisible)) if divisible else 0
+    return {
+        "text": topic_text,
+        "emoji": emoji,
+        "value": {
+            "divisible": divisible,
+            "divider": divider,
+            "share": share_value
+        },
+        "is_credit": False,
+        "have_plan": False,
+        "share": True
+    }
+
+
 def create_number_topic(topic: dict) -> dict:
+    value_topic = st.number_input(topic["text"], value=topic["unit"],
+                                  min_value=topic["unit"])
+    return {
+        "text": topic["text"],
+        "value": value_topic,
+        "is_credit": False,
+        "have_plan": False
+    }
+
+
     topic_type = topic.get("type", "number")
     unit_name = "руб." if topic_type == "money" else "шт."
     unit_value = topic.get("unit", 0)
@@ -294,6 +305,8 @@ def main():
                     group_unit.append(credit_topic(topic, index_topic))
                 elif topic["have_plan"] is True:
                     group_unit.append(create_plan_fact_topic(topic))
+                elif topic["share"] is True:
+                    group_unit.append(create_share_topic(topic))
                 else:
                     group_unit.append(number_topic(topic))
 
