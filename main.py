@@ -67,7 +67,7 @@ def create_share_topic(topic: dict) -> dict:
     }
 
 def credit_topic(topic, index_topic):
-    text_topic = f"{topic["text"]} (подано/одобрено/выдано)"
+    text_topic = f'{topic["text"]} (подано/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
 
     st.markdown(f"**{text_topic}**")
@@ -98,7 +98,7 @@ def credit_topic(topic, index_topic):
 
 def number_topic(topic):
     unit_text_topic = "руб." if topic["type"] == "money" else "шт."
-    text_topic = f"{topic["text"]} {unit_text_topic}"
+    text_topic = f'{topic["text"]} {unit_text_topic}'
     value_topic = st.number_input(topic["text"], value=topic["unit"],
                                   min_value=topic["unit"])
     emoji = topic.get("emoji", "🟢")
