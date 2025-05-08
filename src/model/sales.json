@@ -58,7 +58,7 @@
         "emoji": "3️⃣",
         "type": "money",
         "text": "Фин услуги",
-        "unit": 0,
+        "unit": 0.0,
         "is_credit": false,
         "have_plan": false,
         "share": false
@@ -67,7 +67,7 @@
         "emoji": "➖",
         "type": "money",
         "text": "Аксы",
-        "unit": 0,
+        "unit": 0.0,
         "is_credit": false,
         "have_plan": false,
         "share": false

@@ -173,8 +173,7 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                st.success("Отчет отправлен!")
-                st.balloons()
+
 
 
 if __name__ == "__main__":

@@ -41,8 +41,7 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
 
     if is_status_set is False:
         logging.error(f"Status for {opio_name} doesn't set. Report for this opio already have.")
-        st.error("Отчет для этого ОПиО уже отправлен.")
-        return
+        st.warning("Отчет для этого ОПиО уже был отправлен ранее.")
 
     if is_photo_need:
         logging.info(f"Send report with check photo. For tg-groupe{query_report.chat_id}.")
@@ -50,4 +49,8 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
     else:
         logging.info(f"Send report. For tg-groupe{query_report.chat_id}.")
         bot.send_message(query_report.chat_id, text=message)
+
+    st.success("Отчет отправлен!")
+    st.balloons()
+
 
