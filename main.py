@@ -174,7 +174,7 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                sales.calculate(report_data, query_report)
+                # sales.calculate(report_data, query_report)
 
 
 
