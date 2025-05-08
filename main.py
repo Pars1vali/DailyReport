@@ -149,22 +149,26 @@ def main():
         photo_need = model_report.get("photo_need", False)
 
         report_data = list()
-        for group in model_report["schema"]:
-            group_unit = list()
+        sales_data = list()
 
-            for topic in group:
+        for index_group, group in enumerate(model_report["schema"]):
+            report_group = list()
+            sales_group = list()
+
+            for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
-                    topic_data = create_credit_topic(topic)
+                    report_topic = create_credit_topic(topic)
+                    sales_topic = sales.calc_credit_topic(topic, index_group, index_topic, query_report)
                 elif topic["have_plan"] is True:
-                    topic_data = create_plan_fact_topic(topic)
+                    report_topic = create_plan_fact_topic(topic)
                 elif topic["share"] is True:
-                    topic_data = create_share_topic(topic)
+                    report_topic = create_share_topic(topic)
                 else:
-                    topic_data = create_number_topic(topic)
+                    report_topic = create_number_topic(topic)
 
-                group_unit.append(topic_data)
+                report_group.append(report_topic)
 
-            report_data.append(group_unit)
+            report_data.append(report_group)
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
