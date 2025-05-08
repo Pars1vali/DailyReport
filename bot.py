@@ -11,7 +11,7 @@ logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
-def set_status(connection_query, opio_name: str, status: str) -> bool:
+def set_status(connection_query: util.ConnectionQuery, opio_name: str, status: str) -> bool:
     try:
         logging.info(f"Set stautus - {status} for opio -{opio_name} in report-message.")
         is_status_set = True
@@ -34,7 +34,7 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
         return is_status_set
 
 
-def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_name) -> bool:
+def send_report(report_data, is_photo_need, photo_cheque, query_report: util.ConnectionQuery, opio_name) -> bool:
     message = report_service.build_detailed_message(report_data, opio_name)
     reply_parameters = telebot.types.ReplyParameters(message_id=query_report.report_id, chat_id=query_report.chat_id)
 
@@ -53,5 +53,10 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
 
     st.success("Отчет отправлен!")
     st.balloons()
+
+
+def send_sales_message(sales_message_text, query_conn: util.ConnectionQuery):
+    logging.info("Send sales message in groupe.")
+    bot.send_message(chat_id=query_conn.chat_id, text=sales_message_text)
 
 

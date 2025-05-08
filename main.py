@@ -6,7 +6,6 @@ import sales
 import util, bot
 from util import get_opio_list
 
-report_data = list()
 logging.getLogger().setLevel(logging.INFO)
 
 def create_plan_fact_topic(topic: dict) -> dict:
@@ -175,7 +174,7 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                sales.calculate(query_report)
+                sales.calculate(report_data, query_report)
 
 
 
