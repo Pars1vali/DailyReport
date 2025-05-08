@@ -6,7 +6,6 @@ from thefuzz import process
 from util import Status
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-chat_id = os.getenv("GROUP_CHAT_ID")
 
 logging.getLogger().setLevel(logging.INFO)
 bot = telebot.TeleBot(BOT_TOKEN)
@@ -37,6 +36,8 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
 
 def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_name) -> bool:
     message = report_service.build_detailed_message(report_data, opio_name)
+    reply_parameters = telebot.types.ReplyParameters(message_id=query_report.message_id, chat_id=query_report.chat_id)
+
     is_status_set = set_status(query_report, opio_name, Status.complete)
 
     if is_status_set is False:
@@ -45,10 +46,10 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
 
     if is_photo_need:
         logging.info(f"Send report with check photo. For tg-groupe{query_report.chat_id}.")
-        bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message, reply_to_message_id=query_report.message_id)
+        bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message, reply_parameters=reply_parameters)
     else:
         logging.info(f"Send report. For tg-groupe{query_report.chat_id}.")
-        bot.send_message(query_report.chat_id, text=message, reply_to_message_id=query_report.message_id)
+        bot.send_message(query_report.chat_id, text=message, reply_parameters=reply_parameters)
 
     st.success("Отчет отправлен!")
     st.balloons()
