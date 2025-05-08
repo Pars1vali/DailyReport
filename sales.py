@@ -10,31 +10,28 @@ def calc_credit_topic(topic: dict, index_group: int, index_topic: int, query_con
     is_topic_exists = r.exists(topic_key)
 
     # {
-    #     "text": topic_text,
+    #     "text": text_topic,
     #     "emoji": emoji,
     #     "value": {
-    #         "divisible": divisible,
-    #         "divider": divider,
-    #         "share": share_value
+    #         "loan_apply": loan_apply,
+    #         "approved": approved,
+    #         "issued": issued
     #     },
-    #     "is_credit": False,
+    #     "is_credit": True,
     #     "have_plan": False,
-    #     "share": True
+    #     "share": False
     # }
 
     if is_topic_exists:
-        logging.info("Topic exists. Calculate sales-data and return result-topic.")
+        logging.info(f"Topic exists. Calculate sales-data and return result-topic. Topic-key - {topic_key}")
         topic_sum_data = r.get(topic_key)
         topic_sum = json.loads(topic_sum_data)
-        logging.info(f"{topic_key} {topic_sum} {topic}")
 
-        topic_sum_value = {
-            "divisible": topic_sum["value"]["divisible"] + topic["value"]["divisible"],
-            "divider": topic_sum["value"]["divider"] + topic["value"]["divider"],
-            "share": topic_sum["value"]["share"] + topic["value"]["share"]
+        topic_sum["value"] = {
+            "loan_apply": topic_sum["value"]["loan_apply"] + topic["value"]["loan_apply"],
+            "approved": topic_sum["value"]["approved"] + topic["value"]["approved"],
+            "issued": topic_sum["value"]["issued"] + topic["value"]["issued"]
         }
-        topic_sum["value"] = topic_sum_value
-
 
         r.set(topic_key, json.dumps(topic_sum))
 
