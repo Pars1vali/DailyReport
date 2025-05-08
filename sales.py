@@ -31,11 +31,11 @@ def calc_credit_topic(topic: dict, index_group: int, index_topic: int, query_con
             "share": topic_sum["value"]["share_value"] + topic["value"]["share_value"]
         }
 
-        r.set(topic_key, topic_sum)
+        r.set(topic_key, json.dumps(topic_sum))
 
     else:
         logging.info("Topic doesn't exists. Set current topic as result topic and return this.")
-        r.set(topic_key, topic)
+        r.set(topic_key, json.dumps(topic))
 
         return topic
 
