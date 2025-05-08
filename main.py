@@ -158,7 +158,7 @@ def main():
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
                     report_topic = create_credit_topic(topic)
-                    sales_topic = sales.calc_credit_topic(report_topic, index_group, index_topic, query_report)
+                    # sales_topic = sales.calc_credit_topic(report_topic, index_group, index_topic, query_report)
                 elif topic["have_plan"] is True:
                     report_topic = create_plan_fact_topic(topic)
                 elif topic["share"] is True:
