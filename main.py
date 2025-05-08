@@ -1,7 +1,6 @@
 import json
 import streamlit as st
 import logging
-
 import sales
 import util, bot
 from util import get_opio_list
@@ -53,7 +52,7 @@ def create_share_topic(topic: dict) -> dict:
                                   placeholder=help,
                                   key=f"{id(topic)}fact")
 
-    share_value = int((divider * 100) / (divisible)) if divisible else 0
+    share_value = int((divider * 100) / divisible) if divisible else 0
     return {
         "text": topic_text,
         "emoji": emoji,
@@ -67,7 +66,7 @@ def create_share_topic(topic: dict) -> dict:
         "share": True
     }
 
-def credit_topic(topic, index_topic):
+def create_credit_topic(topic):
     text_topic = f'{topic["text"]} (подано/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
 
@@ -76,13 +75,13 @@ def credit_topic(topic, index_topic):
     col1, col2, col3 = st.columns(3)
     with col1:
         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
-                                     key=f"{index_topic}loan_apply")
+                                     key=f"{id(topic)}loan_apply")
     with col2:
         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
-                                   key=f"{index_topic}approved")
+                                   key=f"{id(topic)}approved")
     with col3:
         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
-                                 key=f"{index_topic}issued")
+                                 key=f"{id(topic)}issued")
 
     return {
         "text": text_topic,
@@ -97,7 +96,7 @@ def credit_topic(topic, index_topic):
         "share": False
     }
 
-def number_topic(topic):
+def create_number_topic(topic):
     unit_text_topic = "руб." if topic["type"] == "money" else "шт."
     text_topic = f'{topic["text"]} {unit_text_topic}'
     value_topic = st.number_input(topic["text"], value=topic["unit"],
@@ -112,7 +111,6 @@ def number_topic(topic):
         "have_plan": False,
         "share": False
     }
-
 
 def get_query_info():
     try:
@@ -144,24 +142,29 @@ def main():
 
     with st.form("Отчет"):
         name_report = model_report.get("name", "Отчет")
+
         st.subheader(name_report)
         opio_name = st.selectbox("Название вашего ОПиО", get_opio_list(), index=None, placeholder="ОПиО")
         photo_cheque = st.file_uploader("Отчет без гашения", type=["jpg", "jpeg", "png"])
         photo_need = model_report.get("photo_need", False)
 
         report_data = list()
-        for index_group, group in enumerate(model_report["schema"]):
+        for group in model_report["schema"]:
             group_unit = list()
-            report_data.append(group_unit)
-            for index_topic, topic in enumerate(group):
+
+            for topic in group:
                 if topic["is_credit"] is True:
-                    group_unit.append(credit_topic(topic, index_topic))
+                    topic_data = create_credit_topic(topic)
                 elif topic["have_plan"] is True:
-                    group_unit.append(create_plan_fact_topic(topic))
+                    topic_data = create_plan_fact_topic(topic)
                 elif topic["share"] is True:
-                    group_unit.append(create_share_topic(topic))
+                    topic_data = create_share_topic(topic)
                 else:
-                    group_unit.append(number_topic(topic))
+                    topic_data = create_number_topic(topic)
+
+                group_unit.append(topic_data)
+
+            report_data.append(group_unit)
 
         send = st.form_submit_button("Отправить", use_container_width=True)
 
@@ -174,10 +177,12 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                # sales.calculate(report_data, query_report)
 
 
-
-
+#Сделать кэширование топиков отдельно и поулчени их из кэша по id отчета, вместе с номером группы и топика в группе
+# Передачу на кеширование сдлеать в условном ветвлении и вызывать нужный метод из модуля sales, модуль будет возвращать
+# суммарные продажи по топику, так же в виде топика.
+# Из суммарных топиков создается сообщение отчет также по продажам суммарным, если было сообщение раньше редактируется если нет, то
+# отправляется новое
 if __name__ == "__main__":
     main()

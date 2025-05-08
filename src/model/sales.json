@@ -6,7 +6,7 @@
       {
         "emoji": "1️⃣",
         "type": "number",
-        "text": "Сим Мегафон+Yota",
+        "text": "Сим МФ+Yota",
         "help": "Все SIM, исключая ТП Промо и Мегасемья для участника",
         "unit": 0,
         "is_credit": false,
@@ -16,7 +16,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "YOTA Максимум 1150 руб.",
+        "text": "YOTA Макс 1150р.",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -25,7 +25,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "Абонементы Мегафон+Yota",
+        "text": "Абон МФ+Yota",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
