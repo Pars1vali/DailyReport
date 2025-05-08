@@ -45,10 +45,10 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_nam
 
     if is_photo_need:
         logging.info(f"Send report with check photo. For tg-groupe{query_report.chat_id}.")
-        bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message)
+        bot.send_photo(query_report.chat_id, photo=photo_cheque, caption=message, reply_to_message_id=query_report.message_id)
     else:
         logging.info(f"Send report. For tg-groupe{query_report.chat_id}.")
-        bot.send_message(query_report.chat_id, text=message)
+        bot.send_message(query_report.chat_id, text=message, reply_to_message_id=query_report.message_id)
 
     st.success("Отчет отправлен!")
     st.balloons()
