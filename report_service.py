@@ -21,25 +21,25 @@ def create_report_message(report_name: str, char_status):
     return report_message
 
 
-def get_report_message(message_id: str, report_name: str):
-    logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {message_id}")
-    message_report_exists = r.exists(message_id)
+def get_report_message(report_id: str, report_name: str):
+    logging.info(f"Get report-message for opio from tg-groupe. Get from redis storage by key - {report_id}")
+    message_report_exists = r.exists(report_id)
 
     if message_report_exists:
         logging.info("Report-message in redis storage exists. Get message-report from redis.")
-        message_report_data = r.get(message_id)
+        message_report_data = r.get(report_id)
         message_report = message_report_data.decode("utf-8")
     else:
         logging.info("Report-message in redis storage doesnt exists. Create new report-message and load to redis.")
         message_report = create_report_message(report_name, util.Status.none)
-        r.set(message_id, message_report)
+        r.set(report_id, message_report)
 
     return message_report
 
 
-def set_report_message(message_id, message_text):
+def set_report_message(report_id, message_text):
     logging.info("Set new report message in redis storage.")
-    r.set(message_id, message_text)
+    r.set(report_id, message_text)
 
 
 def build_detailed_message(report_data, opio_name) -> str:
@@ -61,6 +61,7 @@ def build_detailed_message(report_data, opio_name) -> str:
                 message_report += f'\t{text} - {value}\n'
 
     return message_report
+
 
 
 def get_config(connection_query: util.ConnectionQuery):

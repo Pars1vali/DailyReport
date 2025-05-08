@@ -1,6 +1,8 @@
 import json
 import streamlit as st
 import logging
+
+import sales
 import util, bot
 from util import get_opio_list
 
@@ -118,11 +120,11 @@ def get_query_info():
         query_report = util.ConnectionQuery(is_url_correct=True)
         query_report.report_type = st.query_params["report_type"]
         query_report.chat_id = st.query_params["chat_id"]
-        query_report.message_id = st.query_params["message_id"]
+        query_report.report_id = st.query_params["report_id"]
     except Exception as e:
         query_report.is_url_correct = False
         query_report.report_type = "sales"
-        logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
+        logging.error(f"Error for get query params from url-request. Send report impossible. {e}")
 
     return query_report
 
@@ -173,6 +175,8 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
+                sales.calculate(query_report)
+
 
 
 

@@ -16,7 +16,7 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
         logging.info(f"Set stautus - {status} for opio -{opio_name} in report-message.")
         is_status_set = True
 
-        report_message_old = report_service.get_report_message(connection_query.message_id, "Отчет о продажах")
+        report_message_old = report_service.get_report_message(connection_query.report_id, "Отчет о продажах")
         opio_choose_name, probability = process.extract(opio_name, util.get_opio_list(), limit=1)[0]
 
         report_message_edit = re.sub(
@@ -24,8 +24,8 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
             f"{opio_choose_name} - {status}", \
             report_message_old)
 
-        report_service.set_report_message(connection_query.message_id, report_message_edit)
-        bot.edit_message_text(chat_id=connection_query.chat_id, message_id=connection_query.message_id,
+        report_service.set_report_message(connection_query.report_id, report_message_edit)
+        bot.edit_message_text(chat_id=connection_query.chat_id, message_id=connection_query.report_id,
                               text=report_message_edit)
         return is_status_set
     except Exception as e:
@@ -36,7 +36,7 @@ def set_status(connection_query, opio_name: str, status: str) -> bool:
 
 def send_report(report_data, is_photo_need, photo_cheque, query_report, opio_name) -> bool:
     message = report_service.build_detailed_message(report_data, opio_name)
-    reply_parameters = telebot.types.ReplyParameters(message_id=query_report.message_id, chat_id=query_report.chat_id)
+    reply_parameters = telebot.types.ReplyParameters(message_id=query_report.report_id, chat_id=query_report.chat_id)
 
     is_status_set = set_status(query_report, opio_name, Status.complete)
 
