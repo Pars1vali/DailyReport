@@ -27,11 +27,13 @@ def calc_credit_topic(topic: dict, index_group: int, index_topic: int, query_con
         topic_sum_data = r.get(topic_key)
         topic_sum = json.loads(topic_sum_data)
 
-        topic_sum["value"] = {
+        topic_sum_value = {
             "divisible": topic_sum["value"]["divisible"] + topic["value"]["divisible"],
             "divider": topic_sum["value"]["divider"] + topic["value"]["divider"],
             "share": topic_sum["value"]["share"] + topic["value"]["share"]
         }
+        topic_sum["value"] = topic_sum_value
+
 
         r.set(topic_key, json.dumps(topic_sum))
 
