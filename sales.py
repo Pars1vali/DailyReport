@@ -26,6 +26,7 @@ def calc_credit_topic(topic: dict, index_group: int, index_topic: int, query_con
         logging.info("Topic exists. Calculate sales-data and return result-topic.")
         topic_sum_data = r.get(topic_key)
         topic_sum = json.loads(topic_sum_data)
+        logging.info(f"{topic_key} {topic_sum} {topic}")
 
         topic_sum_value = {
             "divisible": topic_sum["value"]["divisible"] + topic["value"]["divisible"],
