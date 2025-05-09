@@ -7,7 +7,7 @@ from util import get_opio_list
 
 logging.getLogger().setLevel(logging.INFO)
 
-def create_plan_fact_topic(topic: dict) -> dict:
+def create_plan_fact_topic(topic: dict, index_topic: int) -> dict:
     topic_text = f'{topic["text"]} (план/факт)'
     emoji = topic.get("emoji", "🟢")
     help = topic.get("help", None)
@@ -17,10 +17,10 @@ def create_plan_fact_topic(topic: dict) -> dict:
     col1, col2 = st.columns(2)
     with col1:
         plan = st.number_input("План", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
-                               key=f"{id(topic)}plan")
+                               key=f"{index_topic}plan")
     with col2:
         fact = st.number_input("Факт", value=topic["unit"], min_value=topic["unit"], help=help, placeholder=help,
-                               key=f"{id(topic)}fact")
+                               key=f"{index_topic}fact")
 
     return {
         "text": topic_text,
@@ -34,7 +34,7 @@ def create_plan_fact_topic(topic: dict) -> dict:
         "share": False
     }
 
-def create_share_topic(topic: dict) -> dict:
+def create_share_topic(topic: dict, index_topic: int) -> dict:
     topic_text = f'{topic["text"]} %'
     emoji = topic.get("emoji", "🟢")
     help = topic.get("help", None)
@@ -46,11 +46,11 @@ def create_share_topic(topic: dict) -> dict:
     with col1:
         divisible = st.number_input(divisible_text, value=topic["unit"], min_value=topic["unit"], help=help,
                                     placeholder=help,
-                                    key=f"{id(topic)}plan")
+                                    key=f"{index_topic}plan")
     with col2:
         divider = st.number_input(divider_text, value=topic["unit"], min_value=topic["unit"], help=help,
                                   placeholder=help,
-                                  key=f"{id(topic)}fact")
+                                  key=f"{index_topic}fact")
 
     share_value = int((divider * 100) / divisible) if divisible else 0
     return {
@@ -66,7 +66,7 @@ def create_share_topic(topic: dict) -> dict:
         "share": True
     }
 
-def create_credit_topic(topic, index_topic):
+def create_credit_topic(topic, index_topic: int) -> dict:
     text_topic = f'{topic["text"]} (подано/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
 
@@ -96,7 +96,7 @@ def create_credit_topic(topic, index_topic):
         "share": False
     }
 
-def create_number_topic(topic):
+def create_number_topic(topic: dict) -> dict:
     unit_text_topic = "руб." if topic["type"] == "money" else "шт."
     text_topic = f'{topic["text"]} {unit_text_topic}'
     value_topic = st.number_input(topic["text"], value=topic["unit"],
@@ -160,9 +160,9 @@ def main():
                     report_topic = create_credit_topic(topic, index_topic)
                     # sales_topic = sales.calc_credit_topic(report_topic, index_group, index_topic, query_report)
                 elif topic["have_plan"] is True:
-                    report_topic = create_plan_fact_topic(topic)
+                    report_topic = create_plan_fact_topic(topic, index_topic)
                 elif topic["share"] is True:
-                    report_topic = create_share_topic(topic)
+                    report_topic = create_share_topic(topic, index_topic)
                 else:
                     report_topic = create_number_topic(topic)
 
