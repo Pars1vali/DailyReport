@@ -66,7 +66,7 @@ def create_share_topic(topic: dict) -> dict:
         "share": True
     }
 
-def create_credit_topic(topic):
+def create_credit_topic(topic, index_topic):
     text_topic = f'{topic["text"]} (подано/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
 
@@ -75,13 +75,13 @@ def create_credit_topic(topic):
     col1, col2, col3 = st.columns(3)
     with col1:
         loan_apply = st.number_input("Заявки", value=topic["unit"], min_value=topic["unit"],
-                                     key=f"{id(topic)}loan_apply")
+                                     key=f"{index_topic}loan_apply")
     with col2:
         approved = st.number_input("Одобрено", value=topic["unit"], min_value=topic["unit"],
-                                   key=f"{id(topic)}approved")
+                                   key=f"{index_topic}approved")
     with col3:
         issued = st.number_input("Выдано", value=topic["unit"], min_value=topic["unit"],
-                                 key=f"{id(topic)}issued")
+                                 key=f"{index_topic}issued")
 
     return {
         "text": text_topic,
@@ -157,7 +157,7 @@ def main():
 
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
-                    report_topic = create_credit_topic(topic)
+                    report_topic = create_credit_topic(topic, index_topic)
                     # sales_topic = sales.calc_credit_topic(report_topic, index_group, index_topic, query_report)
                 elif topic["have_plan"] is True:
                     report_topic = create_plan_fact_topic(topic)
