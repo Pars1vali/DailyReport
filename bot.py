@@ -56,7 +56,7 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report: util.Con
 
 
 def send_sales_message(sales_message_text, query_conn: util.ConnectionQuery):
-    logging.info("Send sales message in groupe.")
-    bot.send_message(chat_id=query_conn.chat_id, text=sales_message_text)
+    logging.info("Send sales message in group.")
+    bot.edit_message_text(chat_id=query_conn.chat_id, message_id=query_conn.sales_id, text=sales_message_text)
 
 

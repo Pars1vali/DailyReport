@@ -118,6 +118,7 @@ def get_query_info():
         query_report.report_type = st.query_params["report_type"]
         query_report.chat_id = st.query_params["chat_id"]
         query_report.report_id = st.query_params["report_id"]
+        query_report.sales_id = st.query_params["sales_id"]
     except Exception as e:
         query_report.is_url_correct = False
         query_report.report_type = "sales"

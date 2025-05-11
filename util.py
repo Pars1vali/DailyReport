@@ -14,11 +14,12 @@ class Status:
 
 class ConnectionQuery:
 
-    def __init__(self, is_url_correct: bool, chat_id=None, report_id=None, report_type=None):
+    def __init__(self, is_url_correct: bool, chat_id=None, report_id=None, sales_id=None, report_type=None):
         self.is_url_correct = is_url_correct
         self.report_type = report_type
         self.chat_id = chat_id
         self.report_id = report_id
+        self.sales_id = sales_id
 
     @staticmethod
     def create(conn_query: list):
@@ -27,6 +28,7 @@ class ConnectionQuery:
             query_report.report_type = conn_query["report_type"]
             query_report.chat_id = conn_query["chat_id"]
             query_report.report_id = conn_query["report_id"]
+            query_report.sales_id = conn_query["sales_id"]
         except Exception as e:
             logging.error(f"Error for get query params from url-request. Send report imposible. {e}")
             query_report.is_url_correct = False
