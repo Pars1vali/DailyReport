@@ -182,7 +182,7 @@ def main():
                 sales_data = sales.calc(report_data, query_report)
                 sales_message = sales.create_sales_message(sales_data)
                 logging.info(sales_message)
-                # bot.send_sales_message(sales_message, query_report)
+                bot.send_sales_message(sales_message, query_report)
 
 
 
