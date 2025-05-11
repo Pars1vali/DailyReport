@@ -68,7 +68,7 @@ def calc_share_topic(topic: dict, index_group: int, index_topic: int, query_conn
 
         total_divisible = topic_sum["value"]["divisible"] + topic["value"]["divisible"]
         total_divider = topic_sum["value"]["divider"] + topic["value"]["divider"]
-        total_share = (int(total_divider / total_divisible) * 100) if total_divisible else 0
+        total_share = int(total_divider / total_divisible * 100) if total_divisible else 0
 
         topic_sum["value"] = {
             "divisible": total_divisible,
