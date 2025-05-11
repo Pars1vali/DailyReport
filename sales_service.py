@@ -66,10 +66,14 @@ def calc_share_topic(topic: dict, index_group: int, index_topic: int, query_conn
         topic_sum_data = r.get(topic_key)
         topic_sum = json.loads(topic_sum_data)
 
+        total_divisible = topic_sum["value"]["divisible"] + topic["value"]["divisible"]
+        total_divider = topic_sum["value"]["divider"] + topic["value"]["divider"]
+        total_share = int((total_divider * 100) / total_divisible) if total_divisible else 0
+
         topic_sum["value"] = {
-            "divisible": topic_sum["value"]["divisible"] + topic["value"]["divisible"],
-            "divider": topic_sum["value"]["divider"] + topic["value"]["divider"],
-            "share": topic_sum["value"]["share"] + topic["value"]["share"]
+            "divisible": total_divisible,
+            "divider": total_divider,
+            "share": total_share
         }
 
         r.set(topic_key, json.dumps(topic_sum))
