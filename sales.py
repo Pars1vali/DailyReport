@@ -3,7 +3,7 @@ import logging
 
 def create_sales_message(sales_data: list):
     logging.info(f"Create sales_result message in tg-group.")
-    message_report = "Отчет о продажах\n\n"
+    message_report = "Отчет по продажам за сектор.\n\n"
 
     for group in sales_data:
         for topic in group:
