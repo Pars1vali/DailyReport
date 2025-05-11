@@ -52,7 +52,7 @@ def create_share_topic(topic: dict, index_topic: int) -> dict:
                                   placeholder=help,
                                   key=f"{index_topic}fact")
 
-    share_value = int((divider * 100) / divisible) if divisible else 0
+    share_value = (int(divider / divisible) * 100) if divisible else 0
     return {
         "text": topic_text,
         "emoji": emoji,

@@ -98,7 +98,7 @@
         "emoji": "💵",
         "type": "money",
         "text": "СБП",
-        "unit": 0.0,
+        "unit": 0,
         "is_credit": false,
         "have_plan": false,
         "share": true,
@@ -109,7 +109,7 @@
         "emoji": "💷",
         "type": "money",
         "text": "ДП",
-        "unit": 0.0,
+        "unit": 0,
         "is_credit": false,
         "have_plan": false,
         "share": false
@@ -118,7 +118,7 @@
         "emoji": "🚚",
         "type": "money",
         "text": "Виртуальная полка, руб",
-        "unit": 0.0,
+        "unit": 0,
         "is_credit": false,
         "have_plan": false,
         "share": false
