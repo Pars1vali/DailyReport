@@ -149,16 +149,13 @@ def main():
         photo_need = model_report.get("photo_need", False)
 
         report_data = list()
-        sales_data = list()
 
         for index_group, group in enumerate(model_report["schema"]):
             report_group = list()
-            sales_group = list()
 
             for index_topic, topic in enumerate(group):
                 if topic["is_credit"] is True:
                     report_topic = create_credit_topic(topic, index_topic)
-                    # sales_topic = sales.calc_credit_topic(report_topic, index_group, index_topic, query_report)
                 elif topic["have_plan"] is True:
                     report_topic = create_plan_fact_topic(topic, index_topic)
                 elif topic["share"] is True:
@@ -181,6 +178,11 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
+                sales_data = sales.calc(report_data, query_report)
+                sales_message = sales.create_sales_message(sales_data)
+                logging.info(sales_message)
+                # bot.send_sales_message(sales_message, query_report)
+
 
 
 #Сделать кэширование топиков отдельно и поулчени их из кэша по id отчета, вместе с номером группы и топика в группе
