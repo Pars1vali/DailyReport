@@ -19,6 +19,7 @@ def create_sales_message(sales_data: list):
             else:
                 message_report += f'\t{text} - {value}\n'
 
+    logging.info(f"Created message - \n{message_report}.")
     return message_report
 
 def calc(report_data: list, query_report: util.ConnectionQuery):

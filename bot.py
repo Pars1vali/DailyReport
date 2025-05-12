@@ -51,8 +51,6 @@ def send_report(report_data, is_photo_need, photo_cheque, query_report: util.Con
         logging.info(f"Send report. For tg-groupe{query_report.chat_id}.")
         bot.send_message(query_report.chat_id, text=message, reply_parameters=reply_parameters)
 
-    st.success("Отчет отправлен!")
-    st.balloons()
 
 
 def send_sales_message(sales_message_text, query_conn: util.ConnectionQuery):
