@@ -138,6 +138,7 @@ def get_model_report(query_report: util.ConnectionQuery):
     return model_report
 
 def main():
+    is_send_disabled = False
     query_report = get_query_info()
     model_report = get_model_report(query_report)
 
@@ -168,9 +169,11 @@ def main():
 
             report_data.append(report_group)
 
-        send = st.form_submit_button("Отправить", use_container_width=True)
+        send = st.form_submit_button("Отправить", use_container_width=True, disabled=is_send_disabled)
 
         if send:
+            global is_send_disabled
+            is_send_disabled = True
             if query_report.is_url_correct is False:
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif opio_name is None:
@@ -183,6 +186,7 @@ def main():
                     sales_data = sales.calc(report_data, query_report)
                     sales_message = sales.create_sales_message(sales_data)
                     bot.send_sales_message(sales_message, query_report)
+                    is_send_disabled = False
                     st.success("Отчет отправлен.")
                     st.balloons()
 
