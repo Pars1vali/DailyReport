@@ -178,15 +178,12 @@ def main():
             elif photo_need and photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                with st.status("Отчет отправляется..."):
+                with st.spinner("Отчет отправляется..."):
                     bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                    st.write("Отчет отправлен.")
-                    st.write("Подсчет продаж...")
                     sales_data = sales.calc(report_data, query_report)
                     sales_message = sales.create_sales_message(sales_data)
                     bot.send_sales_message(sales_message, query_report)
-                    st.success("Готово!")
-                    # st.success("Отчет отправлен!")
+                    st.success("Отчет отправлен.")
                     st.balloons()
 
 
