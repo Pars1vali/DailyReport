@@ -138,6 +138,7 @@ def get_model_report(query_report: util.ConnectionQuery):
     return model_report
 
 def main():
+    st.session_state.is_send_disabled = False
     query_report = get_query_info()
     model_report = get_model_report(query_report)
 
@@ -168,9 +169,10 @@ def main():
 
             report_data.append(report_group)
 
-        send = st.form_submit_button("Отправить", use_container_width=True)
+        send = st.form_submit_button("Отправить", use_container_width=True, disabled=st.session_state.is_send_disabled)
 
         if send:
+
             if query_report.is_url_correct is False:
                 st.error("Неверная ссылка. Отправить отчет не удастся.")
             elif opio_name is None:
@@ -179,10 +181,12 @@ def main():
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
                 with st.spinner("Отчет отправляется..."):
+                    st.session_state.is_send_disabled = True
                     bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
                     sales_data = sales.calc(report_data, query_report)
                     sales_message = sales.create_sales_message(sales_data)
                     bot.send_sales_message(sales_message, query_report)
+                    st.session_state.is_send_disabled = False
                     st.success("Отчет отправлен.")
                     st.balloons()
 
