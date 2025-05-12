@@ -1,4 +1,4 @@
-import json
+import json, time
 import streamlit as st
 import logging
 import sales
@@ -6,6 +6,7 @@ import util, bot
 from util import get_opio_list
 
 logging.getLogger().setLevel(logging.INFO)
+
 
 def create_plan_fact_topic(topic: dict, index_topic: int) -> dict:
     topic_text = f'{topic["text"]} (план/факт)'
@@ -33,6 +34,7 @@ def create_plan_fact_topic(topic: dict, index_topic: int) -> dict:
         "have_plan": True,
         "share": False
     }
+
 
 def create_share_topic(topic: dict, index_topic: int) -> dict:
     topic_text = f'{topic["text"]} %'
@@ -66,6 +68,7 @@ def create_share_topic(topic: dict, index_topic: int) -> dict:
         "share": True
     }
 
+
 def create_credit_topic(topic, index_topic: int) -> dict:
     text_topic = f'{topic["text"]} (подано/одобрено/выдано)'
     emoji = topic.get("emoji", "🟢")
@@ -96,6 +99,7 @@ def create_credit_topic(topic, index_topic: int) -> dict:
         "share": False
     }
 
+
 def create_number_topic(topic: dict) -> dict:
     unit_text_topic = "руб." if topic["type"] == "money" else "шт."
     text_topic = f'{topic["text"]} {unit_text_topic}'
@@ -112,6 +116,7 @@ def create_number_topic(topic: dict) -> dict:
         "share": False
     }
 
+
 def get_query_info():
     try:
         query_report = util.ConnectionQuery(is_url_correct=True)
@@ -126,6 +131,7 @@ def get_query_info():
 
     return query_report
 
+
 def get_model_report(query_report: util.ConnectionQuery):
     if query_report.report_type == "dopio":
         src_path = "src/model/dopio.json"
@@ -136,6 +142,7 @@ def get_model_report(query_report: util.ConnectionQuery):
         model_report = json.load(file)
 
     return model_report
+
 
 def main():
     query_report = get_query_info()
@@ -179,13 +186,30 @@ def main():
             elif photo_need and photo_cheque is None:
                 st.warning("Необходимо загрузить фото отчета без гашения")
             else:
-                with st.spinner("Отчет отправляется..."):
-                    bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
-                    sales_data = sales.calc(report_data, query_report)
-                    sales_message = sales.create_sales_message(sales_data)
-                    bot.send_sales_message(sales_message, query_report)
-                    st.success("Отчет отправлен.")
-                    st.balloons()
+                status_bat = st.progress(0, "Отчет отправлется...")
+                bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
+
+                status_bat.progress(50, "Отчет отправлен. Подсчет продаж...")
+                sales_data = sales.calc(report_data, query_report)
+                sales_message = sales.create_sales_message(sales_data)
+
+                status_bat.progress(80, "Продажи подсчитаны. Отправка отчета о продажах...")
+                bot.send_sales_message(sales_message, query_report)
+
+                status_bat.progress(100, "Отправлено")
+                time.sleep(1)
+                status_bat.empty()
+
+                st.success("Можно закрывать!")
+                st.balloons()
+
+                # with st.spinner("Отчет отправляется..."):
+                #     bot.send_report(report_data, photo_need, photo_cheque, query_report, opio_name)
+                #     sales_data = sales.calc(report_data, query_report)
+                #     sales_message = sales.create_sales_message(sales_data)
+                #     bot.send_sales_message(sales_message, query_report)
+                #     st.success("Отчет отправлен.")
+                #     st.balloons()
 
 
 if __name__ == "__main__":
