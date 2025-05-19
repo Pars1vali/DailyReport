@@ -30,6 +30,24 @@
         "is_credit": false,
         "have_plan": false,
         "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "Мегасемья",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "SIM Промо",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
       }
     ],
     [
@@ -47,6 +65,16 @@
         "type": "number",
         "text": "РК Realme",
         "help": "Акционные модели 14 pro, C75, C61",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "СМФ Первая цена",
+        "help": "Xiaomi Redmi A3, A3x, Realme Note 60, 60x",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
