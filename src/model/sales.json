@@ -6,8 +6,18 @@
       {
         "emoji": "1️⃣",
         "type": "number",
-        "text": "Сим МФ+Yota",
+        "text": "Сим МФ",
         "help": "Все SIM, исключая ТП Промо и Мегасемья для участника",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "Сим Yota",
+        "help": "Все SIM",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -18,7 +28,16 @@
       {
         "emoji": "2️⃣",
         "type": "number",
-        "text": "Абон МФ+Yota",
+        "text": "Абон МФ",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "Абон Yota Макс.",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -28,15 +47,6 @@
     [
       {
         "emoji": "3️⃣",
-        "type": "number",
-        "text": "Смартфоны все",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
         "type": "number",
         "text": "РК Honor",
         "unit": 0,
@@ -57,24 +67,6 @@
         "emoji": "➖",
         "type": "number",
         "text": "1-я цена",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Apple",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Остальные смартфоны",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -105,25 +97,18 @@
       {
         "emoji": "5️⃣",
         "type": "number",
+        "text": "Плоттер",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "emoji": "6️⃣",
+        "type": "number",
         "text": "Адаптер",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Гарнитуры БТ",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      },
-      {
-        "emoji": "➖",
-        "type": "number",
-        "text": "Плоттеры",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
