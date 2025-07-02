@@ -1,12 +1,12 @@
 {
-  "name": "отчет о продажах",
+  "name": "Отчет о продажах",
   "photo_need": true,
   "schema": [
     [
       {
         "emoji": "1️⃣",
         "type": "number",
-        "text": "сим мф+yota ",
+        "text": "Сим МФ+Yota ",
         "help": "все sim, исключая тп промо и мегасемья для участника",
         "unit": 0,
         "is_credit": false,
@@ -16,7 +16,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "абонементы мф(все) + yota(6/12)",
+        "text": "Абонементы МФ(все) + Yota(6/12)",
         "help": "все sim",
         "unit": 0,
         "is_credit": false,
@@ -26,7 +26,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "мегасемья",
+        "text": "Мегасемья",
         "help": "все sim",
         "unit": 0,
         "is_credit": false,
@@ -38,7 +38,7 @@
       {
         "emoji": "2️⃣",
         "type": "number",
-        "text": "рк tecno",
+        "text": "РК Tecno",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -47,7 +47,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "рк honor",
+        "text": "РК Honor",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -56,7 +56,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "apple",
+        "text": "Apple",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -76,7 +76,7 @@
       {
         "emoji": "3️⃣",
         "type": "number",
-        "text": "плоттер",
+        "text": "Плоттер",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -85,7 +85,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "страховки",
+        "text": "Страховки",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -96,7 +96,7 @@
       {
         "emoji": "4️⃣",
         "type": "number",
-        "text": "аксессуары",
+        "text": "Аксессуары",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -107,7 +107,7 @@
       {
         "emoji": "5️⃣",
         "type": "credit",
-        "text": "бк заявки, без кд",
+        "text": "БК заявки, без КД",
         "unit": 0,
         "is_credit": true,
         "have_plan": false,
@@ -125,7 +125,7 @@
       {
         "emoji": "➖",
         "type": "credit",
-        "text": "кд заявки",
+        "text": "КД заявки",
         "unit": 0,
         "is_credit": true,
         "have_plan": false,
@@ -136,7 +136,7 @@
       {
         "emoji": "6️⃣",
         "type": "number",
-        "text": "адаптер",
+        "text": "Адаптер",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
