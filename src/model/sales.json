@@ -1,13 +1,13 @@
 {
-  "name": "Отчет о продажах",
+  "name": "отчет о продажах",
   "photo_need": true,
   "schema": [
     [
       {
         "emoji": "1️⃣",
         "type": "number",
-        "text": "Сим МФ",
-        "help": "Все SIM, исключая ТП Промо и Мегасемья для участника",
+        "text": "сим мф+yota ",
+        "help": "все sim, исключая тп промо и мегасемья для участника",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -16,8 +16,18 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "Сим Yota",
-        "help": "Все SIM",
+        "text": "абонементы мф(все) + yota(6/12)",
+        "help": "все sim",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "мегасемья",
+        "help": "все sim",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -28,7 +38,7 @@
       {
         "emoji": "2️⃣",
         "type": "number",
-        "text": "Абон МФ",
+        "text": "рк tecno",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -37,18 +47,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "Абон Yota Макс.",
-        "unit": 0,
-        "is_credit": false,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "3️⃣",
-        "type": "number",
-        "text": "РК Honor",
+        "text": "рк honor",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -57,7 +56,7 @@
       {
         "emoji": "➖",
         "type": "number",
-        "text": "РК Samsung",
+        "text": "apple",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -75,29 +74,18 @@
     ],
     [
       {
-        "emoji": "4️⃣",
-        "type": "credit",
-        "text": "КД заявки",
+        "emoji": "3️⃣",
+        "type": "number",
+        "text": "плоттер",
         "unit": 0,
-        "is_credit": true,
+        "is_credit": false,
         "have_plan": false,
         "share": false
       },
       {
         "emoji": "➖",
-        "type": "credit",
-        "text": "БК заявки",
-        "unit": 0,
-        "is_credit": true,
-        "have_plan": false,
-        "share": false
-      }
-    ],
-    [
-      {
-        "emoji": "5️⃣",
         "type": "number",
-        "text": "Плоттер",
+        "text": "страховки",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
@@ -106,9 +94,49 @@
     ],
     [
       {
+        "emoji": "4️⃣",
+        "type": "number",
+        "text": "аксессуары",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
+        "emoji": "5️⃣",
+        "type": "credit",
+        "text": "бк заявки, без кд",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "number",
+        "text": "БК выдача",
+        "unit": 0,
+        "is_credit": false,
+        "have_plan": false,
+        "share": false
+      },
+      {
+        "emoji": "➖",
+        "type": "credit",
+        "text": "кд заявки",
+        "unit": 0,
+        "is_credit": true,
+        "have_plan": false,
+        "share": false
+      }
+    ],
+    [
+      {
         "emoji": "6️⃣",
         "type": "number",
-        "text": "Адаптер",
+        "text": "адаптер",
         "unit": 0,
         "is_credit": false,
         "have_plan": false,
